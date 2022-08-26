@@ -195,7 +195,7 @@ def stats(update, context):
     if heroku: stats += heroku 
    
     if PICS:
-        sendPhoto(stats, context.bot, update.message, random.choice(PICS))
+        sendPhoto(stats, context.bot, update.message, random.choice(PICS), reply_markup)
     else:
         sendMarkup(stats, context.bot, update.message, reply_markup)
 
