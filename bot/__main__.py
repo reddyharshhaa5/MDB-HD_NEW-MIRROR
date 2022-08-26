@@ -189,7 +189,8 @@ def stats(update, context):
                     f'<b>├  𝙵𝚁𝙴𝙴 𝙾𝙵 𝙼𝙴𝙼𝙾𝚁𝚈:</b> {mem_a}\n'\
                     f'<b>╰  𝚄𝚂𝙰𝙶𝙴 𝙾𝙵 𝙼𝙴𝙼𝙾𝚁𝚈:</b> {mem_u}\n'
 
-                
+    reply_message = sendMessage(stats, context.bot, update.message)
+    Thread(target=auto_delete_message, args=(context.bot, update.message, reply_message)).start()           
 
 #     heroku = getHerokuDetails(HEROKU_API_KEY, HEROKU_APP_NAME)
 #     if heroku: stats += heroku 
