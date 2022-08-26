@@ -197,7 +197,7 @@ def stats(update, context):
     if PICS:
         sendPhoto(stats, context.bot, update.message, random.choice(PICS))
     else:
-        sendMarkup(stats, context.bot, update.message)
+        sendMarkup(stats, context.bot, update.message, reply_markup)
 
     # update.effective_message.reply_photo(photo=random.choice(PICS), caption=stats, parse_mode=ParseMode.HTML)
 
