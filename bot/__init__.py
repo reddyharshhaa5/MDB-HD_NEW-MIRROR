@@ -658,8 +658,8 @@ try:
     if len(START_BTN1_NAME) == 0 or len(START_BTN1_URL) == 0:
         raise KeyError
 except:
-    START_BTN1_NAME = 'Master'
-    START_BTN1_URL = 'https://t.me/toxytech'
+    START_BTN1_NAME = 'ADMIN'
+    START_BTN1_URL = 'https://t.me/nodir_khajiev'
 
 try:
     START_BTN2_NAME = getConfig('START_BTN2_NAME')
@@ -667,15 +667,15 @@ try:
     if len(START_BTN2_NAME) == 0 or len(START_BTN2_URL) == 0:
         raise KeyError
 except:
-    START_BTN2_NAME = 'Support Group'
-    START_BTN2_URL = 'https://t.me/DipeshMirror'
+    START_BTN2_NAME = 'MDB'
+    START_BTN2_URL = 'https://t.me/nodir_khajiev'
 
 try:
     CREDIT_NAME = getConfig('CREDIT_NAME')
     if len(CREDIT_NAME) == 0:
-        CREDIT_NAME = 'ReflectionMirror'
+        CREDIT_NAME = 'MDB'
 except KeyError:
-    CREDIT_NAME = 'ReflectionMirror'
+    CREDIT_NAME = 'MDB'
 
 try:
     FINISHED_PROGRESS_STR = getConfig('FINISHED_PROGRESS_STR') 
@@ -694,16 +694,16 @@ try:
     if len(CHANNEL_USERNAME) == 0:
         raise KeyError
 except KeyError:
-    log_info("CHANNEL_USERNAME not provided! Using default @DipeshMirror")
-    CHANNEL_USERNAME = "DipeshMirror"
+    log_info("CHANNEL_USERNAME not provided!")
+    CHANNEL_USERNAME = None
 try:
     FSUB_CHANNEL_ID = getConfig("FSUB_CHANNEL_ID")
     if len(FSUB_CHANNEL_ID) == 0:
         raise KeyError
     FSUB_CHANNEL_ID = int(FSUB_CHANNEL_ID)
 except KeyError:
-    log_info("CHANNEL_ID not provided! Using default id of @DipeshMirror")
-    FSUB_CHANNEL_ID = -1001512307861
+    log_info("CHANNEL_ID not provided!")
+    FSUB_CHANNEL_ID = None
 try:
     TOKEN_PICKLE_URL = getConfig('TOKEN_PICKLE_URL')
     if len(TOKEN_PICKLE_URL) == 0:
