@@ -195,12 +195,12 @@ def stats(update, context):
 #     heroku = getHerokuDetails(HEROKU_API_KEY, HEROKU_APP_NAME)
 #     if heroku: stats += heroku 
    
-#     if PICS:
-#         sendPhoto(stats, context.bot, update.message, random.choice(PICS), reply_markup)
-#     else:
-#         sendMarkup(stats, context.bot, update.message, reply_markup)
+    if PICS:
+        sendPhoto(stats, context.bot, update.message, random.choice(PICS), reply_markup)
+    else:
+        sendMarkup(stats, context.bot, update.message, reply_markup)
 
-    # update.effective_message.reply_photo(photo=random.choice(PICS), caption=stats, parse_mode=ParseMode.HTML)
+    update.effective_message.reply_photo(photo=random.choice(PICS), caption=stats, parse_mode=ParseMode.HTML)
 
 def start(update, context):
     buttons = ButtonMaker()
