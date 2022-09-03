@@ -25,6 +25,7 @@ from bot.modules.wayback import getRandomUserAgent
 from .modules import authorize, list, cancel_mirror, mirror_status, mirror_leech, clone, ytdlp, shell, eval, \
                     delete, count, leech_settings, search, rss, wayback, speedtest, usage, anilist, bt_select, mediainfo, hash, sleep
 from datetime import datetime
+from threading import Thread
 
 try: import heroku3
 except ModuleNotFoundError: srun("pip install heroku3", capture_output=False, shell=True)
