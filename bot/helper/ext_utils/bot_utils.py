@@ -165,7 +165,7 @@ def get_progress_bar_string(status):
 
 def get_readable_message():
     with download_dict_lock:
-        msg = f""
+        msg = f"{TITLE_NAME} №{CMD_INDEX}\n"
         if STATUS_LIMIT is not None:
             tasks = len(download_dict)
             global pages
