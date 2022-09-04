@@ -235,7 +235,7 @@ class MirrorLeechListener:
         mesg = self.message.text.split('\n')
         message_args = mesg[0].split(' ', maxsplit=1)
         reply_to = self.message.reply_to_message
-        slmsg = f"Added by: {self.tag} \n👥 User ID: <code>{self.user_id}</code>\n\n"
+        slmsg = f"\n👤Added by: {self.tag}\n\n"
         if LINK_LOGS:
             try:
                 source_link = f"<code>{message_args[1]}</code>"
