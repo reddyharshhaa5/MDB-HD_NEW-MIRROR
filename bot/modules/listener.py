@@ -347,10 +347,10 @@ class MirrorLeechListener:
                     msg += f'\n<b>├ Corrupted Files: </b>{typ}'
             if EMOJI_THEME is True:
                 msg += f'\n<b>├⌛ It Tooks:</b> {get_readable_time(time() - self.message.date.timestamp())}'
-                msg += f'\n<b>╰👤 cc: </b>{self.tag}\n\n'
+                msg += f'\n<b>╰👤 User: </b>{self.tag}\n\n'
             else: 
                 msg += f'\n<b>├ It Tooks:</b> {get_readable_time(time() - self.message.date.timestamp())}'
-                msg += f'\n<b>╰ cc: </b>{self.tag}\n\n'
+                msg += f'\n<b>╰ User: </b>{self.tag}\n\n'
             if BOT_PM and self.message.chat.type != 'private':	
                 bot_d = bot.get_me()	
                 b_uname = bot_d.username	
@@ -402,22 +402,20 @@ class MirrorLeechListener:
                 return			   			  
         else:
             if EMOJI_THEME is True:
-                msg += f'\n<b>├📦 Type: </b>{typ}'
+                msg += f'\n<b>├💈 Type: </b>{typ}'
             else:
                 msg += f'\n<b>├ Type: </b>{typ}'
             if typ == "Folder":
                 if EMOJI_THEME is True:
-                    msg += f'\n<b>├🗃️ SubFolders: </b>{folders}'
-                    msg += f'\n<b>├🗂️ Files: </b>{files}'
+                    msg += f'\n<b>├🗃️ SubFolders: </b>{folders} | 🗂️ Files: </b>{files}'
                 else:
-                    msg += f'\n<b>├ SubFolders: </b>{folders}'
-                    msg += f'\n<b>├ Files: </b>{files}'
+                    msg += f'\n<b>├ SubFolders: </b>{folders} | Files: </b>{files}'
             if EMOJI_THEME is True:
                 msg += f'\n<b>├⌛ It Tooks:</b> {get_readable_time(time() - self.message.date.timestamp())}'
-                msg += f'\n<b>╰👤 cc: </b>{self.tag}\n\n'
+                msg += f'\n<b>╰👤 User: </b>{self.tag}\n\n'
             else:
                 msg += f'\n<b>├ It Tooks:</b> {get_readable_time(time() - self.message.date.timestamp())}'
-                msg += f'\n<b>╰ cc: </b>{self.tag}\n\n'
+                msg += f'\n<b>╰ User: </b>{self.tag}\n\n'
             buttons = ButtonMaker()
             link = short_url(link)
             buttons.buildbutton("☁️ Drive Link", link)
