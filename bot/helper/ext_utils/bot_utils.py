@@ -461,8 +461,25 @@ def bot_sys_stats():
             num_unzip += 1
         if stats.status() == MirrorStatus.STATUS_SPLITTING:
             num_split += 1
-    return f"""
+    return 
+    if len(CMD_INDEX) == 0:
+        f"""
 ⚡{TITLE_NAME}⚡ Stats
+
+Tasks: {tasks}
+
+CPU: {progress_bar(cpu)} {cpu}%
+RAM: {progress_bar(mem)} {mem}%
+
+DISK: {progress_bar(disk)} {disk}%
+SENT: {sent} | RECV: {recv}
+
+DLs: {num_active} | ULs: {num_upload} | SEEDING: {num_seeding}
+ZIP: {num_zip} | UNZIP: {num_unzip} | SPLIT: {num_split}
+"""
+    else:
+        f"""
+⚡{TITLE_NAME}⚡№{CMD_INDEX} Stats
 
 Tasks: {tasks}
 
