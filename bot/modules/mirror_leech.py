@@ -198,7 +198,7 @@ def _mirror_leech(bot, message, isZip=False, extract=False, isQbit=False, isLeec
             help_msg += "\n<code>/command</code> 10(number of links/files)"
             reply_message = sendMessage(help_msg, bot, message)
             Thread(target=auto_delete_message, args=(bot, message, reply_message)).start()
-		return reply_message
+	return reply_message
 
     LOGGER.info(link)
 
