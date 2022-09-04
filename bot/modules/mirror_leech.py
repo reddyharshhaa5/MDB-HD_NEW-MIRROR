@@ -231,7 +231,7 @@ def _mirror_leech(bot, message, isZip=False, extract=False, isQbit=False, isLeec
         if MEGA_KEY is not None:
             Thread(target=MegaDownloader(listener).add_download, args=(link, f'{DOWNLOAD_DIR}{listener.uid}/')).start()
         else:
-            sendMessage('MEGA_API_KEY not Provided!', bot, message)
+            sendMessage('MEGA is not added. Sorry!', bot, message)
     elif isQbit:
         Thread(target=QbDownloader(listener).add_qb_torrent, args=(link, f'{DOWNLOAD_DIR}{listener.uid}',
                                                                    select, ratio, seed_time)).start()
