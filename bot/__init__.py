@@ -52,16 +52,16 @@ try:
 except:
     pass
 
-try:
-    HEROKU_API_KEY = getConfig('HEROKU_API_KEY')
-    HEROKU_APP_NAME = getConfig('HEROKU_APP_NAME')
-    if len(HEROKU_API_KEY) == 0 or len(HEROKU_APP_NAME) == 0:
-        raise KeyError
-except:
-    HEROKU_APP_NAME = None
-    HEROKU_API_KEY = None
+# try:
+#     HEROKU_API_KEY = getConfig('HEROKU_API_KEY')
+#     HEROKU_APP_NAME = getConfig('HEROKU_APP_NAME')
+#     if len(HEROKU_API_KEY) == 0 or len(HEROKU_APP_NAME) == 0:
+#         raise KeyError
+# except:
+#     HEROKU_APP_NAME = None
+#     HEROKU_API_KEY = None
 
-load_dotenv('config.env', override=True)
+# load_dotenv('config.env', override=True)
 
 try:
     NETRC_URL = getConfig('NETRC_URL')
