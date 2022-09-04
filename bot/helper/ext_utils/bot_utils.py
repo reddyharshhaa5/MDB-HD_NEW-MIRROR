@@ -462,7 +462,7 @@ def bot_sys_stats():
         if stats.status() == MirrorStatus.STATUS_SPLITTING:
             num_split += 1
     return f"""
-⚡{TITLE_NAME}⚡ Stats
+⚡{TITLE_NAME}⚡{CMD_INDEX} Stats
 
 Tasks: {tasks}
 
