@@ -564,7 +564,7 @@ try:
     if len(TIMEZONE) == 0:
         TIMEZONE = None
 except:
-    TIMEZONE = "Asia/Kolkata"
+    TIMEZONE = "Asia/Tashkent"
 try:
     CRYPT = getConfig('CRYPT')
     if len(CRYPT) == 0:
@@ -769,7 +769,7 @@ try:
 except:
     pass
 
-DRIVES_NAMES.append("Main")
+DRIVES_NAMES.append("MIRROR DRIVE")
 DRIVES_IDS.append(parent_id)
 if ospath.exists('drive_folder'):
     with open('drive_folder', 'r+') as f:
