@@ -345,7 +345,7 @@ class GoogleDriveHelper:
                 if EMOJI_THEME is True:
                     msg += f'<b>╭🗂️ Name: </b><code>{meta.get("name")}</code>'
                     msg += f'\n<b>├📦 Size: </b>{get_readable_file_size(self.transferred_size)}'
-                    msg += f'\n<b>├♻ Type: </b>Folder'
+                    msg += f'\n<b>├💈 Type: </b>Folder'
                     msg += f'\n<b>├🗃️ SubFolders: </b>{self.__total_folders}'
                     msg += f'\n<b>├🗂️ Files: </b>{self.__total_files}'
                 else:
@@ -376,7 +376,7 @@ class GoogleDriveHelper:
                     mime_type = 'File'
                 if EMOJI_THEME is True:
                     msg += f'\n<b>├📦 Size: </b>{get_readable_file_size(int(meta.get("size", 0)))}'
-                    msg += f'\n<b>├♻ Type: </b>{mime_type}'
+                    msg += f'\n<b>├💈 Type: </b>{mime_type}'
                 else:
                     msg += f'\n<b>├ Size: </b>{get_readable_file_size(int(meta.get("size", 0)))}'
                     msg += f'\n<b>├ Type: </b>{mime_type}'
@@ -788,7 +788,7 @@ class GoogleDriveHelper:
                 if EMOJI_THEME is True:
                     msg += f'<b>╭🗂️ Name: </b><code>{name}</code>'
                     msg += f'\n<b>├📦 Size: </b>{get_readable_file_size(self.__total_bytes)}'
-                    msg += f'\n<b>├♻ Type: </b>Folder'
+                    msg += f'\n<b>├💈 Type: </b>Folder'
                     msg += f'\n<b>├🗃️ SubFolders: </b>{self.__total_folders}'
                 else:
                     msg += f'<b>╭ Name: </b><code>{name}</code>'
@@ -806,7 +806,7 @@ class GoogleDriveHelper:
                 self.__gDrive_file(meta)
                 if EMOJI_THEME is True:
                     msg += f'\n<b>├📦 Size: </b>{get_readable_file_size(self.__total_bytes)}'
-                    msg += f'\n<b>├♻ Type: </b>{mime_type}'
+                    msg += f'\n<b>├💈 Type: </b>{mime_type}'
                 else:
                     msg += f'\n<b>├ Size: </b>{get_readable_file_size(self.__total_bytes)}'
                     msg += f'\n<b>├ Type: </b>{mime_type}'
