@@ -277,18 +277,18 @@ class MirrorLeechListener:
             pmwarn = ''
         if MIRROR_LOGS and self.message.chat.type != 'private':
             if EMOJI_THEME is True:
-                logwarn = f"<b>⚠️ I have sent files in {TITLE_NAME} Log Channel. Join <a href=\"{MIRROR_LOG_URL}\">{TITLE_NAME} Log channel</a> </b>\n"
+                logwarn = f"\n<b>⚠️ I have sent files in ⚡{TITLE_NAME}⚡ Log Channel. Join <a href=\"{MIRROR_LOG_URL}\">⚡{TITLE_NAME}⚡ Log channel</a> </b>\n"
             else:
-                logwarn = f"<b>I have sent files in {TITLE_NAME} Log Channel. Join <a href=\"{MIRROR_LOG_URL}\">{TITLE_NAME} Log channel</a> </b>\n"
+                logwarn = f"\n<b>I have sent files in ⚡{TITLE_NAME}⚡ Log Channel. Join <a href=\"{MIRROR_LOG_URL}\">⚡{TITLE_NAME}⚡ Log channel</a> </b>\n"
         elif self.message.chat.type == 'private':
             logwarn = ''
         else:
             logwarn = ''
         if LEECH_LOG and self.message.chat.type != 'private':
             if EMOJI_THEME is True:
-                logleechwarn = f"<b>⚠️ I have sent files in {TITLE_NAME} Log Channel. Join <a href=\"{LEECH_LOG_URL}\">{TITLE_NAME} Log channel</a> </b>\n"
+                logleechwarn = f"\n<b>⚠️ I have sent files in ⚡{TITLE_NAME}⚡ Log Channel. Join <a href=\"{LEECH_LOG_URL}\">⚡{TITLE_NAME}⚡ Log channel</a> </b>\n"
             else:
-                logleechwarn = f"<b>I have sent files in {TITLE_NAME} Log Channel. Join <a href=\"{LEECH_LOG_URL}\">{TITLE_NAME} Log channel</a> </b>\n"
+                logleechwarn = f"\n<b>I have sent files in ⚡{TITLE_NAME}⚡ Log Channel. Join <a href=\"{LEECH_LOG_URL}\">⚡{TITLE_NAME}⚡ Log channel</a> </b>\n"
         elif self.message.chat.type == 'private':
             logleechwarn = ''
         else:
