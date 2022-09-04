@@ -291,9 +291,14 @@ def get_readable_message():
             bmsg += f"\n<b>DL:</b> {get_readable_file_size(dl_speed)}/s | <b>UL:</b> {get_readable_file_size(up_speed)}/s"
         
         buttons = ButtonMaker()
-        buttons.sbutton("🔃Refresh", "status refresh")
-        buttons.sbutton("ℹ️Statistics", str(THREE))
-        buttons.sbutton("❌Close", "status close")
+        if EMOJI_THEME is True:
+            buttons.sbutton("🔃Refresh", "status refresh")
+            buttons.sbutton("ℹ️Statistics", str(THREE))
+            buttons.sbutton("❌Close", "status close")
+        else:
+            buttons.sbutton("Refresh", "status refresh")
+            buttons.sbutton("Statistics", str(THREE))
+            buttons.sbutton("Close", "status close")
         sbutton = InlineKeyboardMarkup(buttons.build_menu(3))
         
         if STATUS_LIMIT is not None and tasks > STATUS_LIMIT:
