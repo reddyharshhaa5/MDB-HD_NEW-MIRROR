@@ -3,7 +3,7 @@ from telegram.ext import CommandHandler, CallbackQueryHandler
 from time import sleep
 from threading import Thread
 
-from bot import download_dict, dispatcher, download_dict_lock, SUDO_USERS, OWNER_ID, AUTO_DELETE_MESSAGE_DURATION
+from bot import download_dict, dispatcher, download_dict_lock, SUDO_USERS, OWNER_ID, AUTO_DELETE_MESSAGE_DURATION, EMOJI_THEME
 from bot.helper.telegram_helper.bot_commands import BotCommands
 from bot.helper.telegram_helper.filters import CustomFilters
 from bot.helper.telegram_helper.message_utils import sendMessage, sendMarkup, auto_delete_message
@@ -46,16 +46,28 @@ def cancel_all(status):
             sleep(1)
 
 def cancell_all_buttons(update, context):
-    buttons = button_build.ButtonMaker()
-    buttons.sbutton("Downloading", f"canall {MirrorStatus.STATUS_DOWNLOADING}")
-    buttons.sbutton("Uploading", f"canall {MirrorStatus.STATUS_UPLOADING}")
-    buttons.sbutton("Seeding", f"canall {MirrorStatus.STATUS_SEEDING}")
-    buttons.sbutton("Cloning", f"canall {MirrorStatus.STATUS_CLONING}")
-    buttons.sbutton("Extracting", f"canall {MirrorStatus.STATUS_EXTRACTING}")
-    buttons.sbutton("Archiving", f"canall {MirrorStatus.STATUS_ARCHIVING}")
-    buttons.sbutton("Queued", f"canall {MirrorStatus.STATUS_WAITING}")
-    buttons.sbutton("Paused", f"canall {MirrorStatus.STATUS_PAUSED}")
-    buttons.sbutton("All", "canall all")
+    if EMOJI_THEME is True:
+        buttons = button_build.ButtonMaker()
+        buttons.sbutton("📥Downloading", f"canall {MirrorStatus.STATUS_DOWNLOADING}")
+        buttons.sbutton("📤Uploading", f"canall {MirrorStatus.STATUS_UPLOADING}")
+        buttons.sbutton("🌧Seeding", f"canall {MirrorStatus.STATUS_SEEDING}")
+        buttons.sbutton("♻️Cloning", f"canall {MirrorStatus.STATUS_CLONING}")
+        buttons.sbutton("📂Extracting", f"canall {MirrorStatus.STATUS_EXTRACTING}")
+        buttons.sbutton("🔐Archiving", f"canall {MirrorStatus.STATUS_ARCHIVING}")
+        buttons.sbutton("💤Queued", f"canall {MirrorStatus.STATUS_WAITING}")
+        buttons.sbutton("⛔️Paused", f"canall {MirrorStatus.STATUS_PAUSED}")
+        buttons.sbutton("📃All", "canall all")
+    else:
+        buttons = button_build.ButtonMaker()
+        buttons.sbutton("Downloading", f"canall {MirrorStatus.STATUS_DOWNLOADING}")
+        buttons.sbutton("Uploading", f"canall {MirrorStatus.STATUS_UPLOADING}")
+        buttons.sbutton("Seeding", f"canall {MirrorStatus.STATUS_SEEDING}")
+        buttons.sbutton("Cloning", f"canall {MirrorStatus.STATUS_CLONING}")
+        buttons.sbutton("Extracting", f"canall {MirrorStatus.STATUS_EXTRACTING}")
+        buttons.sbutton("Archiving", f"canall {MirrorStatus.STATUS_ARCHIVING}")
+        buttons.sbutton("Queued", f"canall {MirrorStatus.STATUS_WAITING}")
+        buttons.sbutton("Paused", f"canall {MirrorStatus.STATUS_PAUSED}")
+        buttons.sbutton("All", "canall all")
     if AUTO_DELETE_MESSAGE_DURATION == -1:
         buttons.sbutton("Close", "canall close")
     button = InlineKeyboardMarkup(buttons.build_menu(2))
