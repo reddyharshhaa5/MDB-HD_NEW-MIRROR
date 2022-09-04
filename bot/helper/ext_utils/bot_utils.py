@@ -174,15 +174,15 @@ def get_readable_message():
                 globals()['COUNT'] -= STATUS_LIMIT
                 globals()['PAGE_NO'] -= 1
         for index, download in enumerate(list(download_dict.values())[COUNT:], start=1):
-            # if EMOJI_THEME is True:
-            msg += f"<b>╭ <a href='{download.message.link}'>{download.status()}</a>: </b>"
-            msg += f"<code>{escape(str(download.name()))}</code>"
-            # else:
-            #     msg += f"<b>╭ Name:</b> <code>{escape(str(download.name()))}</code>"
-            #     msg += f"\n<b>├ Status:</b> <i>{download.status()}</i>"
+            if EMOJI_THEME is True:
+                msg += f"<b>╭ <a href='{download.message.link}'>{download.status()}</a>: </b>"
+                msg += f"<code>{escape(str(download.name()))}</code>"
+            else:
+                msg += f"<b>╭ Name:</b> <code>{escape(str(download.name()))}</code>"
+                msg += f"\n<b>├ Status:</b> <i>{download.status()}</i>"
             if download.status() not in [MirrorStatus.STATUS_SEEDING, MirrorStatus.STATUS_SPLITTING]:
                 if EMOJI_THEME is True:
-                    msg += f"\n<b>├🌀</b>{get_progress_bar_string(download)} {download.progress()}"
+                    msg += f"\n<b>├🌀 Status:</b> {get_progress_bar_string(download)} {download.progress()}"
                     msg += f"\n<b>├🔄 Processed:</b> {get_readable_file_size(download.processed_bytes())} of {download.size()}"
                     msg += f"\n<b>├⚡ Speed:</b> {download.speed()}"
                     msg += f"\n<b>├⏳ ETA:</b> {download.eta()}"
@@ -205,7 +205,7 @@ def get_readable_message():
                             msg += f"\n<b>├🧿 To Select:</b> <code>/{BotCommands.BtSelectCommand} {download.gid()}</code>"
                         else:
                             msg += f"\n<b>├ Seeders:</b> {download.seeders_num()} | <b>Leechers:</b> {download.leechers_num()}"
-                            msg += f"\n<b>├🧿 To Select:</b> <code>/{BotCommands.BtSelectCommand} {download.gid()}</code>"
+                            msg += f"\n<b>├ To Select:</b> <code>/{BotCommands.BtSelectCommand} {download.gid()}</code>"
                     except:
                         pass
                 if download.message.chat.type != 'private':
