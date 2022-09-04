@@ -296,7 +296,7 @@ class MirrorLeechListener:
         if not self.isPrivate and INCOMPLETE_TASK_NOTIFIER and DB_URI is not None:
             DbManger().rm_complete_task(self.message.link)
         if EMOJI_THEME is True:
-            msg = f"<b>╭🗂️ Name: </b><code>{escape(name)}</code>\n<b>├📐 Size: </b>{size}"
+            msg = f"<b>╭🗂️ Name: </b><code>{escape(name)}</code>\n<b>├📦 Size: </b>{size}"
         else:
             msg = f"<b>╭ Name: </b><code>{escape(name)}</code>\n<b>├ Size: </b>{size}"
         if self.isLeech:
@@ -342,7 +342,7 @@ class MirrorLeechListener:
                 msg += f'\n<b>├ Total Files: </b>{folders}'
             if typ != 0:
                 if EMOJI_THEME is True:
-                    msg += f'\n<b>├💀 Corrupted Files: </b>{typ}'
+                    msg += f'\n<b>├💔 Corrupted Files: </b>{typ}'
                 else:
                     msg += f'\n<b>├ Corrupted Files: </b>{typ}'
             if EMOJI_THEME is True:
