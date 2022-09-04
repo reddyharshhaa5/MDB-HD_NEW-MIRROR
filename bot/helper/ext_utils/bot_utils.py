@@ -166,7 +166,7 @@ def get_progress_bar_string(status):
 def get_readable_message():
     with download_dict_lock:
         if len(CMD_INDEX) == 0:
-            msg = f"⚡⚡⚡⚡{TITLE_NAME}⚡⚡⚡⚡\n\n"
+            msg = f"⚡⚡⚡{TITLE_NAME}⚡⚡⚡\n\n"
         else:
             msg = f"⚡⚡⚡{TITLE_NAME} №{CMD_INDEX}⚡⚡⚡\n\n"
         if STATUS_LIMIT is not None:
@@ -462,7 +462,7 @@ def bot_sys_stats():
         if stats.status() == MirrorStatus.STATUS_SPLITTING:
             num_split += 1
     return f"""
-{TITLE_NAME} Stats
+⚡{TITLE_NAME}⚡ Stats
 
 Tasks: {tasks}
 
