@@ -8,6 +8,7 @@ from bot.helper.telegram_helper.message_utils import sendMessage, deleteMessage,
 from bot.helper.ext_utils.bot_utils import get_readable_file_size, get_readable_time, turn, pop_up_stats, setInterval
 from bot.helper.telegram_helper.filters import CustomFilters
 from bot.helper.telegram_helper.bot_commands import BotCommands
+from bot import EMOJI_THEME
 
 
 def mirror_status(update, context):
@@ -16,9 +17,14 @@ def mirror_status(update, context):
     if count == 0:
         currentTime = get_readable_time(time() - botStartTime)
         free = get_readable_file_size(disk_usage(DOWNLOAD_DIR).free)
-        message = 'No Active Downloads !\n___________________________'
-        message += f"\n<b>CPU:</b> {cpu_percent()}% | <b>FREE:</b> {free}" \
-                   f"\n<b>RAM:</b> {virtual_memory().percent}% | <b>UPTIME:</b> {currentTime}"
+        if EMOJI_THEME is True:
+            message = '🥱No Active Downloads !\n___________________________'
+            message += f"\n<b>🖥CPU:</b> {cpu_percent()}% | <b>💾FREE:</b> {free}" \
+                       f"\n<b>📝RAM:</b> {virtual_memory().percent}% | <b>🟢UPTIME:</b> {currentTime}"
+        else:
+            message = 'No Active Downloads !\n___________________________'
+            message += f"\n<b>CPU:</b> {cpu_percent()}% | <b>FREE:</b> {free}" \
+                       f"\n<b>RAM:</b> {virtual_memory().percent}% | <b>UPTIME:</b> {currentTime}"
         reply_message = sendMessage(message, context.bot, update.message)
         Thread(target=auto_delete_message, args=(context.bot, update.message, reply_message)).start()
     else:
