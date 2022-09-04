@@ -631,27 +631,27 @@ except KeyError:
 try:
     AUTHOR_NAME = getConfig('AUTHOR_NAME')
     if len(AUTHOR_NAME) == 0:
-        AUTHOR_NAME = 'Dipesh'
+        AUTHOR_NAME = 'NXD'
 except KeyError:
-    AUTHOR_NAME = 'Dipesh'
+    AUTHOR_NAME = 'NXD'
 try:
     AUTHOR_URL = getConfig('AUTHOR_URL')
     if len(AUTHOR_URL) == 0:
-        AUTHOR_URL = 'https://t.me/DipeshMirror'
+        AUTHOR_URL = 'https://t.me/nodir_khajiev'
 except KeyError:
-    AUTHOR_URL = 'https://t.me/DipeshMirror'
+    AUTHOR_URL = 'https://t.me/nodir_khajiev'
 try:
     GD_INFO = getConfig('GD_INFO')
     if len(GD_INFO) == 0:
-        GD_INFO = 'Uploaded by ReflectionMirror Mirror Bot'
+        GD_INFO = 'Uploaded by MDB'
 except KeyError:
-    GD_INFO = 'Uploaded by ReflectionMirror Mirror Bot'
+    GD_INFO = 'Uploaded by MDB'
 try:
     TITLE_NAME = getConfig('TITLE_NAME')
     if len(TITLE_NAME) == 0:
-        TITLE_NAME = 'ReflectionMirror'
+        TITLE_NAME = 'MDB'
 except KeyError:
-    TITLE_NAME = 'ReflectionMirror'
+    TITLE_NAME = 'MDB'
 try:
     START_BTN1_NAME = getConfig('START_BTN1_NAME')
     START_BTN1_URL = getConfig('START_BTN1_URL')
@@ -668,7 +668,7 @@ try:
         raise KeyError
 except:
     START_BTN2_NAME = 'MDB'
-    START_BTN2_URL = 'https://t.me/nodir_khajiev'
+    START_BTN2_URL = 'https://t.me/nodirdrivebots'
 
 try:
     CREDIT_NAME = getConfig('CREDIT_NAME')
@@ -681,8 +681,8 @@ try:
     FINISHED_PROGRESS_STR = getConfig('FINISHED_PROGRESS_STR') 
     UN_FINISHED_PROGRESS_STR = getConfig('UN_FINISHED_PROGRESS_STR')
 except:
-    FINISHED_PROGRESS_STR = '●' # '■'
-    UN_FINISHED_PROGRESS_STR = '○' # '□'
+    FINISHED_PROGRESS_STR = '■' # '■●'
+    UN_FINISHED_PROGRESS_STR = '□' # '□○'
 try:
     FSUB = getConfig('FSUB')
     FSUB = FSUB.lower() == 'true'
