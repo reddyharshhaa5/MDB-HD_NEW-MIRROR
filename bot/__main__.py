@@ -120,9 +120,9 @@ now=datetime.now(pytz.timezone(f'{TIMEZONE}'))
 def stats(update, context):
     if ospath.exists('.git'):
         if EMOJI_THEME is True:
-            last_commit = check_output(["git log -1 --date=short --pretty=format:'%cd \n🛠<b>From</b> %cr'"], shell=True).decode()
+            last_commit = check_output(["git log -1 --date=short --pretty=format:'%cd \n🛠<b>FROM</b> %cr'"], shell=True).decode()
         else:
-            last_commit = check_output(["git log -1 --date=short --pretty=format:'%cd \n<b>From</b> %cr'"], shell=True).decode()
+            last_commit = check_output(["git log -1 --date=short --pretty=format:'%cd \n<b>FROM</b> %cr'"], shell=True).decode()
     else:
         last_commit = 'No UPSTREAM_REPO'
     currentTime = get_readable_time(time() - botStartTime)
