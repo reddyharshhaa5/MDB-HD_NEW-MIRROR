@@ -247,7 +247,7 @@ class MirrorLeechListener:
                 try:
                     reply_text = reply_to.text
                     if is_url(reply_text):
-                        source_link = f"<code>{reply_text.strip()}</code>"
+                        source_link = f"🔗Source link: <code>{reply_text.strip()}</code>"
                         for link_log in LINK_LOGS:
                             bot.sendMessage(chat_id=link_log, text=slmsg + source_link, parse_mode=ParseMode.HTML )
                 except TypeError:
@@ -298,14 +298,14 @@ class MirrorLeechListener:
         if EMOJI_THEME is True:
             msg = f"<b>🗂️ Name: </b><code>{escape(name)}</code>\n<b>📦 Size: </b>{size}"
         else:
-            msg = f"<b> Name: </b><code>{escape(name)}</code>\n<b>Size: </b>{size}"
+            msg = f"<b>Name: </b><code>{escape(name)}</code>\n<b>Size: </b>{size}"
         if self.isLeech:
             if SOURCE_LINK is True:
                 try:
                     mesg = message_args[1]
                     if is_magnet(mesg):
                         link = telegraph.create_page(
-                            title=f"{TITLE_NAME} Source Link",
+                            title=f"⚡{TITLE_NAME}⚡ Source Link",
                             content=mesg,
                         )["path"]
                         buttons.buildbutton(f"🔗 Source Link", f"https://graph.org/{link}")
@@ -326,7 +326,7 @@ class MirrorLeechListener:
                             source_link = reply_text.strip()
                             if is_magnet(source_link):
                                 link = telegraph.create_page(
-                                    title=f"{TITLE_NAME} Source Link",
+                                    title=f"⚡{TITLE_NAME}⚡ Source Link",
                                     content=source_link,
                                 )["path"]
                                 buttons.buildbutton(f"🔗 Source Link", f"https://graph.org/{link}")
@@ -454,7 +454,7 @@ class MirrorLeechListener:
                     mesg = message_args[1]
                     if is_magnet(mesg):
                         link = telegraph.create_page(
-                            title=f"{TITLE_NAME} Source Link",
+                            title=f"⚡{TITLE_NAME}⚡ Source Link",
                             content=mesg,
                         )["path"]
                         buttons.buildbutton(f"🔗 Source Link", f"https://graph.org/{link}")
@@ -475,7 +475,7 @@ class MirrorLeechListener:
                             source_link = reply_text.strip()
                             if is_magnet(source_link):
                                 link = telegraph.create_page(
-                                    title=f"{TITLE_NAME} Source Link",
+                                    title=f"⚡{TITLE_NAME}⚡ Source Link",
                                     content=source_link,
                                 )["path"]
                                 buttons.buildbutton(f"🔗 Source Link", f"https://graph.org/{link}")
