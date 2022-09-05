@@ -196,12 +196,12 @@ def stats(update, context):
 #     heroku = getHerokuDetails(HEROKU_API_KEY, HEROKU_APP_NAME)
 #     if heroku: stats += heroku 
    
-#     if PICS:
-#         sendPhoto(stats, context.bot, update.message, random.choice(PICS), reply_markup)
-#     else:
-#         sendMarkup(stats, context.bot, update.message, reply_markup)
+    if PICS:
+        sendPhoto(stats, context.bot, update.message, random.choice(PICS), reply_markup)
+    else:
+        sendMarkup(stats, context.bot, update.message, reply_markup)
 
- #   update.effective_message.reply_photo(photo=random.choice(PICS), caption=stats, parse_mode=ParseMode.HTML)
+   update.effective_message.reply_photo(photo=random.choice(PICS), caption=stats, parse_mode=ParseMode.HTML)
 
 def start(update, context):
     buttons = ButtonMaker()
@@ -472,8 +472,8 @@ def main():
                     msg = f'😎BOT RESTARTED!✅'
                   else:
                     msg = f'😎BOT №{CMD_INDEX} RESTARTED!✅'
-                     msg += "\n\nPlease Re-Add the Torrent's"
-                     msg += f"\n\n{tag}: "
+                  msg += "\n\nPlease Re-Add the Torrent's"
+                  msg += f"\n\n{tag}: "
                      for index, link in enumerate(links, start=1):
                          msg += f" <a href='{link}'>{index}</a> |"
                          if len(msg.encode()) > 4000:
