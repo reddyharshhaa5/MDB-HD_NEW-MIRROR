@@ -296,12 +296,8 @@ def _qual_subbuttons(task_id, qual, msg):
         size = formats_dict[qual][br]
         buttonName = f"{br}K ({get_readable_file_size(size)})"
         buttons.sbutton(str(buttonName), f"qu {task_id} {video_format}")
-    if EMOJI_THEME is True:
-        buttons.sbutton("🔙Back", f"qu {task_id} back")
-        buttons.sbutton("❌Cancel", f"qu {task_id} cancel")
-    else:    
-        buttons.sbutton("Back", f"qu {task_id} back")
-        buttons.sbutton("Cancel", f"qu {task_id} cancel")
+    buttons.sbutton("🔙Back", f"qu {task_id} back")
+    buttons.sbutton("❌Cancel", f"qu {task_id} cancel")
     SUBBUTTONS = InlineKeyboardMarkup(buttons.build_menu(2))
     editMessage(f"Choose Video Bitrate for <b>{qual}</b>:", msg, SUBBUTTONS)
 
@@ -317,12 +313,8 @@ def _audio_subbuttons(task_id, msg, playlist=False):
             i = ''
             audio_format = f"ba/b-{q}"
         buttons.sbutton(f"{q}K-mp3", f"qu {task_id} {audio_format}")
-    if EMOJI_THEME is True:
-        buttons.sbutton("🔙Back", f"qu {task_id} back")
-        buttons.sbutton("❌Cancel", f"qu {task_id} cancel")
-    else:    
-        buttons.sbutton("Back", f"qu {task_id} back")
-        buttons.sbutton("Cancel", f"qu {task_id} cancel")
+    buttons.sbutton("🔙Back", f"qu {task_id} back")
+    buttons.sbutton("❌Cancel", f"qu {task_id} cancel")
     SUBBUTTONS = InlineKeyboardMarkup(buttons.build_menu(2))
     editMessage(f"Choose Audio{i} Bitrate:", msg, SUBBUTTONS)
 
