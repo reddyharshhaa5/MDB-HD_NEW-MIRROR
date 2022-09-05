@@ -146,13 +146,13 @@ def _ytdl(bot, message, isZip=False, isLeech=False):
     if 'entries' in result:
         for i in ['144', '240', '360', '480', '720', '1080', '1440', '2160']:
             video_format = f"bv*[height<=?{i}][ext=mp4]+ba/b[height<=?{i}]"
-            buttons.sbutton(f"{i}-mp4", f"qu {msg_id} {video_format} t")
+            buttons.sbutton(f"🎦{i}-mp4", f"qu {msg_id} {video_format} t")
             video_format = f"bv*[height<=?{i}][ext=webm]+ba/b[height<=?{i}]"
-            buttons.sbutton(f"{i}-webm", f"qu {msg_id} {video_format} t")
-        buttons.sbutton("MP3", f"qu {msg_id} mp3 t")
-        buttons.sbutton("Best Videos", f"qu {msg_id} {best_video} t")
-        buttons.sbutton("Best Audios", f"qu {msg_id} {best_audio} t")
-        buttons.sbutton("Cancel", f"qu {msg_id} cancel")
+            buttons.sbutton(f"🎦{i}-webm", f"qu {msg_id} {video_format} t")
+        buttons.sbutton("🎵MP3", f"qu {msg_id} mp3 t")
+        buttons.sbutton("🎥Best Videos", f"qu {msg_id} {best_video} t")
+        buttons.sbutton("🎶Best Audios", f"qu {msg_id} {best_audio} t")
+        buttons.sbutton("❌Cancel", f"qu {msg_id} cancel")
         YTBUTTONS = InlineKeyboardMarkup(buttons.build_menu(3))
         listener_dict[msg_id] = [listener, user_id, link, name, YTBUTTONS, args]
         bmsg = sendMarkup('Choose Playlist Videos Quality:', bot, message, YTBUTTONS)
@@ -196,10 +196,10 @@ def _ytdl(bot, message, isZip=False, isLeech=False):
                     buttons.sbutton(buttonName, f"qu {msg_id} {d_data[1]}")
                 else:
                     buttons.sbutton(b_name, f"qu {msg_id} dict {b_name}")
-        buttons.sbutton("MP3", f"qu {msg_id} mp3")
-        buttons.sbutton("Best Video", f"qu {msg_id} {best_video}")
-        buttons.sbutton("Best Audio", f"qu {msg_id} {best_audio}")
-        buttons.sbutton("Cancel", f"qu {msg_id} cancel")
+        buttons.sbutton("🎵MP3", f"qu {msg_id} mp3")
+        buttons.sbutton("🎥Best Video", f"qu {msg_id} {best_video}")
+        buttons.sbutton("🎶Best Audio", f"qu {msg_id} {best_audio}")
+        buttons.sbutton("❌Cancel", f"qu {msg_id} cancel")
         YTBUTTONS = InlineKeyboardMarkup(buttons.build_menu(2))
         listener_dict[msg_id] = [listener, user_id, link, name, YTBUTTONS, args, formats_dict]
         bmsg = sendMarkup('Choose Video Quality:', bot, message, YTBUTTONS)
@@ -220,8 +220,8 @@ def _qual_subbuttons(task_id, b_name, msg):
     for tbr, d_data in formats_dict[b_name].items():
         buttonName = f"{tbr}K ({get_readable_file_size(d_data[0])})"
         buttons.sbutton(buttonName, f"qu {task_id} {d_data[1]}")
-    buttons.sbutton("Back", f"qu {task_id} back")
-    buttons.sbutton("Cancel", f"qu {task_id} cancel")
+    buttons.sbutton("🔙Back", f"qu {task_id} back")
+    buttons.sbutton("❌Cancel", f"qu {task_id} cancel")
     SUBBUTTONS = InlineKeyboardMarkup(buttons.build_menu(2))
     editMessage(f"Choose Bit rate for <b>{b_name}</b>:", msg, SUBBUTTONS)
 
@@ -236,8 +236,8 @@ def _mp3_subbuttons(task_id, msg, playlist=False):
             i = ''
             audio_format = f"ba/b-{q}"
         buttons.sbutton(f"{q}K-mp3", f"qu {task_id} {audio_format}")
-    buttons.sbutton("Back", f"qu {task_id} back")
-    buttons.sbutton("Cancel", f"qu {task_id} cancel")
+    buttons.sbutton("🔙Back", f"qu {task_id} back")
+    buttons.sbutton("❌Cancel", f"qu {task_id} cancel")
     SUBBUTTONS = InlineKeyboardMarkup(buttons.build_menu(2))
     editMessage(f"Choose Audio{i} Bitrate:", msg, SUBBUTTONS)
 
