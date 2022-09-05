@@ -468,7 +468,6 @@ def main():
                 else:
                     msg = f'😎Bot Restarted!✅'
                 for tag, links in data.items():
-                    msg = f'😎Bot Restarted!✅'
                     msg += "\n\nPlease Re-Add the Torrent's"
                     msg += f"\n\n{tag}: "
                      for index, link in enumerate(links, start=1):
