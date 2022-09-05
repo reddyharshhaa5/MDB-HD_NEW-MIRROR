@@ -144,11 +144,11 @@ def _ytdl(bot, message, isZip=False, isLeech=False):
         msg = str(e).replace('<', ' ').replace('>', ' ')
         return sendMessage(tag + " " + msg, bot, message)
     if 'entries' in result:
-        for i in ['144', '240', '360', '480', '720', '1080', '1440', '2160']:
+        for i in ['🎦144', '🎦240', '🎦360', '🎦480', '🎦720', '🎦1080', '🎦1440', '🎦2160']:
             video_format = f"bv*[height<=?{i}][ext=mp4]+ba/b[height<=?{i}]"
-            buttons.sbutton(f"🎦{i}-mp4", f"qu {msg_id} {video_format} t")
+            buttons.sbutton(f"{i}-mp4", f"qu {msg_id} {video_format} t")
             video_format = f"bv*[height<=?{i}][ext=webm]+ba/b[height<=?{i}]"
-            buttons.sbutton(f"🎦{i}-webm", f"qu {msg_id} {video_format} t")
+            buttons.sbutton(f"{i}-webm", f"qu {msg_id} {video_format} t")
         buttons.sbutton("🎵MP3", f"qu {msg_id} mp3 t")
         buttons.sbutton("🎥Best Videos", f"qu {msg_id} {best_video} t")
         buttons.sbutton("🎶Best Audios", f"qu {msg_id} {best_audio} t")
