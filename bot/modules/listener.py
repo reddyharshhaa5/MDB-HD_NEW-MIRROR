@@ -296,9 +296,9 @@ class MirrorLeechListener:
         if not self.isPrivate and INCOMPLETE_TASK_NOTIFIER and DB_URI is not None:
             DbManger().rm_complete_task(self.message.link)
         if EMOJI_THEME is True:
-            msg = f"<b>╭🗂️ Name: </b><code>{escape(name)}</code>\n<b>├📦 Size: </b>{size}"
+            msg = f"<b>🗂️ Name: </b><code>{escape(name)}</code>\n<b>📦 Size: </b>{size}"
         else:
-            msg = f"<b>╭ Name: </b><code>{escape(name)}</code>\n<b>├ Size: </b>{size}"
+            msg = f"<b> Name: </b><code>{escape(name)}</code>\n<b>Size: </b>{size}"
         if self.isLeech:
             if SOURCE_LINK is True:
                 try:
@@ -337,20 +337,20 @@ class MirrorLeechListener:
             else:
                 pass
             if EMOJI_THEME is True:
-                msg += f'\n<b>├📚 Total Files: </b>{folders}'
+                msg += f'\n<b>📚 Total Files: </b>{folders}'
             else:
-                msg += f'\n<b>├ Total Files: </b>{folders}'
+                msg += f'\n<b>Total Files: </b>{folders}'
             if typ != 0:
                 if EMOJI_THEME is True:
-                    msg += f'\n<b>├💔 Corrupted Files: </b>{typ}'
+                    msg += f'\n<b>💔 Corrupted Files: </b>{typ}'
                 else:
-                    msg += f'\n<b>├ Corrupted Files: </b>{typ}'
+                    msg += f'\n<b>Corrupted Files: </b>{typ}'
             if EMOJI_THEME is True:
-                msg += f'\n<b>├⌛ It Tooks:</b> {get_readable_time(time() - self.message.date.timestamp())}'
-                msg += f'\n<b>╰👤 User: </b>{self.tag}\n\n'
+                msg += f'\n<b>⌛ It Tooks:</b> {get_readable_time(time() - self.message.date.timestamp())}'
+                msg += f'\n<b>👤 #Leech_by: </b>{self.tag}\n\n'
             else: 
-                msg += f'\n<b>├ It Tooks:</b> {get_readable_time(time() - self.message.date.timestamp())}'
-                msg += f'\n<b>╰ User: </b>{self.tag}\n\n'
+                msg += f'\n<b>It Tooks:</b> {get_readable_time(time() - self.message.date.timestamp())}'
+                msg += f'\n<b>#Leech_by: </b>{self.tag}\n\n'
             if BOT_PM and self.message.chat.type != 'private':	
                 bot_d = bot.get_me()	
                 b_uname = bot_d.username	
@@ -402,20 +402,20 @@ class MirrorLeechListener:
                 return			   			  
         else:
             if EMOJI_THEME is True:
-                msg += f'\n<b>├💈 Type: </b>{typ}'
+                msg += f'\n<b>💈 Type: </b>{typ}'
             else:
-                msg += f'\n<b>├ Type: </b>{typ}'
+                msg += f'\n<b>Type: </b>{typ}'
             if typ == "Folder":
                 if EMOJI_THEME is True:
-                    msg += f'\n<b>├🗃️ SubFolders: </b>{folders} | 🗂️ Files: </b>{files}'
+                    msg += f'\n<b>🗃️ SubFolders: </b>{folders} | 🗂️ Files: </b>{files}'
                 else:
-                    msg += f'\n<b>├ SubFolders: </b>{folders} | Files: </b>{files}'
+                    msg += f'\n<b>SubFolders: </b>{folders} | Files: </b>{files}'
             if EMOJI_THEME is True:
-                msg += f'\n<b>├⌛ It Tooks:</b> {get_readable_time(time() - self.message.date.timestamp())}'
-                msg += f'\n<b>╰👤 User: </b>{self.tag}\n\n'
+                msg += f'\n<b>⌛ It Tooks:</b> {get_readable_time(time() - self.message.date.timestamp())}'
+                msg += f'\n<b>👤 #Mirror_By: </b>{self.tag}\n\n'
             else:
-                msg += f'\n<b>├ It Tooks:</b> {get_readable_time(time() - self.message.date.timestamp())}'
-                msg += f'\n<b>╰ User: </b>{self.tag}\n\n'
+                msg += f'\n<b>It Tooks:</b> {get_readable_time(time() - self.message.date.timestamp())}'
+                msg += f'\n<b>#Mirror_By: </b>{self.tag}\n\n'
             buttons = ButtonMaker()
             link = short_url(link)
             buttons.buildbutton("☁️ Drive Link", link)
