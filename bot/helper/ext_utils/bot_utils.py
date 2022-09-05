@@ -190,14 +190,12 @@ def get_readable_message():
                     msg += f"\n<b>⚡ Speed:</b> {download.speed()} | <b>⏳ Time Left:</b> {download.eta()}"
                     msg += f"\n<b>⏳ Time Taken: </b>{get_readable_time(time() - download.message.date.timestamp())}"
                     msg += f"\n<b>⚙️ Engine :</b> {download.eng()}"
-                    msg += f"\n<b>⚠️ Warn: </b> <code>/warn {download.message.from_user.id}</code>"
                 else:
                     msg += f"\n<b></b>{get_progress_bar_string(download)} {download.progress()}"
                     msg += f"\n<b>Processed:</b> {get_readable_file_size(download.processed_bytes())} of {download.size()}"
                     msg += f"\n<b>Speed:</b> {download.speed()} | <b>Time Left:</b> {download.eta()}"
                     msg += f"\n<b>Time Taken: </b>{get_readable_time(time() - download.message.date.timestamp())}"
                     msg += f"\n<b>Engine :</b> {download.eng()}"
-                    msg += f"\n<b>Warn: </b> <code>/warn {download.message.from_user.id}</code>"
 
                 if hasattr(download, 'seeders_num'):
                     try:
@@ -213,19 +211,19 @@ def get_readable_message():
                     try:
                         chatid = str(download.message.chat.id)[4:]
                         if EMOJI_THEME is True:
-                            msg += f'\n<b>🌐 Source: </b><a href="https://t.me/c/{chatid}/{download.message.message_id}">{download.message.from_user.first_name}</a> | <b>ID :</b> <code>{download.message.from_user.id}</code>'
+                            msg += f'\n<b>🌐 Source: </b><a href="https://t.me/c/{chatid}/{download.message.message_id}">{download.message.from_user.first_name}</a> (<code>/warn {download.message.from_user.id}</code>)'
                             msg += f"\n<b>🚫 Cancel: </b><code>/{BotCommands.CancelMirror} {download.gid()}</code>"
                         else:
-                            msg += f'\n<b>Source: </b><a href="https://t.me/c/{chatid}/{download.message.message_id}">{download.message.from_user.first_name}</a> | <b>ID :</b> <code>{download.message.from_user.id}</code>'
+                            msg += f'\n<b>Source: </b><a href="https://t.me/c/{chatid}/{download.message.message_id}">{download.message.from_user.first_name}</a> (<code>/warn {download.message.from_user.id}</code>)'
                             msg += f"\n<b>Cancel: </b><code>/{BotCommands.CancelMirror} {download.gid()}</code>"                 
                     except:
                         pass
                 else:
                     if EMOJI_THEME is True:
-                        msg += f'\n<b>👤 User:</b> ️<code>{download.message.from_user.first_name}</code> | <b>ID:</b> <code>{download.message.from_user.id}</code>'
+                        msg += f'\n<b>👤 User:</b> ️<code>{download.message.from_user.first_name}</code> (<code>/warn {download.message.from_user.id}</code>)'
                         msg += f"\n<b>🚫 Cancel: </b><code>/{BotCommands.CancelMirror} {download.gid()}</code>"
                     else:
-                        msg += f'\n<b>User:</b> ️<code>{download.message.from_user.first_name}</code> | <b>ID:</b> <code>{download.message.from_user.id}</code>'
+                        msg += f'\n<b>User:</b> ️<code>{download.message.from_user.first_name}</code> (<code>/warn {download.message.from_user.id}</code>)'
                         msg += f"\n<b>Cancel: </b><code>/{BotCommands.CancelMirror} {download.gid()}</code>"
 
             elif download.status() == MirrorStatus.STATUS_SEEDING:
