@@ -12,7 +12,7 @@ import requests
 import pytz
 from bot import bot, dispatcher, updater, botStartTime, TIMEZONE, IGNORE_PENDING_REQUESTS, LOGGER, Interval, INCOMPLETE_TASK_NOTIFIER, \
                     DB_URI, alive, app, main_loop, HEROKU_APP_NAME, HEROKU_API_KEY, SET_BOT_COMMANDS, AUTHORIZED_CHATS, EMOJI_THEME, \
-                    START_BTN1_NAME, START_BTN1_URL, START_BTN2_NAME, START_BTN2_URL, CREDIT_NAME, TITLE_NAME, PICS
+                    START_BTN1_NAME, START_BTN1_URL, START_BTN2_NAME, START_BTN2_URL, CREDIT_NAME, TITLE_NAME, PICS, CMD_INDEX
 from .helper.ext_utils.fs_utils import start_cleanup, clean_all, exit_clean_up
 from .helper.ext_utils.telegraph_helper import telegraph
 from .helper.ext_utils.bot_utils import get_readable_file_size, get_readable_time
@@ -148,47 +148,47 @@ def stats(update, context):
     if EMOJI_THEME is True:
             stats = f'<b>《🌐 BOT STATISTICS 🌐》</b>\n' \
                     f'<b></b>\n' \
-                    f'<b>🛠 𝙲𝙾𝙼𝙼𝙸𝚃 𝙳𝙰𝚃𝙴:</b> {last_commit}\n'\
-                    f'<b>🟢 𝙾𝙽𝙻𝙸𝙽𝙴 𝚃𝙸𝙼𝙴:</b> {currentTime}\n'\
-                    f'<b>🟢 Sᴛᴀʀᴛᴇᴅ Aᴛ:</b> {current}\n'\
-                    f'<b>☠️ 𝙾𝚂 𝚄𝙿𝚃𝙸𝙼𝙴:</b> {osUptime}\n'\
-                    f'<b>💾 𝙳𝙸𝚂𝙺 𝚂𝙿𝙰𝙲𝙴:</b> {total}\n'\
-                    f'<b>📀 𝙳𝙸𝚂𝙺 𝚂𝙿𝙰𝙲𝙴 𝚄𝚂𝙴𝙳:</b> {used}\n'\
-                    f'<b>💿 𝙳𝙸𝚂𝙺 𝚂𝙿𝙰𝙲𝙴 𝙵𝚁𝙴𝙴:</b> {free}\n'\
-                    f'<b>⏫ 𝚄𝙿𝙻𝙾𝙰𝙳 𝙳𝙰𝚃𝙰:</b> {sent}\n'\
-                    f'<b>⏬ 𝙳𝙾𝚆𝙽𝙻𝙾𝙰𝙳 𝙳𝙰𝚃𝙰:</b> {recv}\n'\
-                    f'<b>🖥️ 𝙲𝙿𝚄 𝚄𝚂𝙰𝙶𝙴:</b> {cpuUsage}%\n'\
-                    f'<b>📝 𝚁𝙰𝙼:</b> {mem_p}%\n'\
-                    f'<b>👸 𝙳𝙸𝚂𝙺 𝚄𝚂𝙴𝙳:</b> {disk}%\n'\
-                    f'<b>💽 𝙿𝙷𝚈𝚂𝙸𝙲𝙰𝙻 𝙲𝙾𝚁𝙴𝚂:</b> {p_core}\n'\
-                    f'<b>🍥 𝚃𝙾𝚃𝙰𝙻 𝙲𝙾𝚁𝙴𝚂:</b> {t_core}\n'\
-                    f'<b>✳ 𝚂𝚆𝙰𝙿:</b> {swap_t}\n'\
-                    f'<b>👸 𝚂𝚆𝙰𝙿 𝚄𝚂𝙴𝙳:</b> {swap_p}%\n'\
-                    f'<b>☁ 𝚃𝙾𝚃𝙰𝙻 𝙾𝙵 𝙼𝙴𝙼𝙾𝚁𝚈:</b> {mem_t}\n'\
-                    f'<b>💃 𝙵𝚁𝙴𝙴 𝙾𝙵 𝙼𝙴𝙼𝙾𝚁𝚈:</b> {mem_a}\n'\
-                    f'<b>👰 𝚄𝚂𝙰𝙶𝙴 𝙾𝙵 𝙼𝙴𝙼𝙾𝚁𝚈:</b> {mem_u}\n'
+                    f'<b>🛠 COMMIT DATE:</b> {last_commit}\n'\
+                    f'<b>🟢 ONLINE TIME:</b> {currentTime}\n'\
+                    f'<b>🟢 STARTED AT:</b> {current}\n'\
+                    f'<b>☠️ OS UPTIME:</b> {osUptime}\n'\
+                    f'<b>💾 DISK:</b> {total}\n'\
+                    f'<b>📀 USED DISK:</b> {used}\n'\
+                    f'<b>💿 FREE DISK:</b> {free}\n'\
+                    f'<b>⏫ UPLOAD:</b> {sent}\n'\
+                    f'<b>⏬ DOWNLOAD:</b> {recv}\n'\
+                    f'<b>🖥️ CPU USAGE:</b> {cpuUsage}%\n'\
+                    f'<b>📝 RAM:</b> {mem_p}%\n'\
+                    f'<b>👸 DISK USED:</b> {disk}%\n'\
+                    f'<b>💽 PHYSICAL CORES:</b> {p_core}\n'\
+                    f'<b>🍥 TOTAL CORES:</b> {t_core}\n'\
+                    f'<b>✳ SWAP:</b> {swap_t}\n'\
+                    f'<b>👸 SWAP USED:</b> {swap_p}%\n'\
+                    f'<b>☁ TOTAL MEMORY:</b> {mem_t}\n'\
+                    f'<b>💃 FREE MEMORY:</b> {mem_a}\n'\
+                    f'<b>👰 USED MEMORY:</b> {mem_u}\n'
     else:
             stats = f'<b>《 BOT STATISTICS 》</b>\n' \
                     f'<b></b>\n' \
-                    f'<b>𝙲𝙾𝙼𝙼𝙸𝚃 𝙳𝙰𝚃𝙴:</b> {last_commit}\n'\
-                    f'<b>𝙾𝙽𝙻𝙸𝙽𝙴 𝚃𝙸𝙼𝙴:</b> {currentTime}\n'\
-                    f'<b>Sᴛᴀʀᴛᴇᴅ Aᴛ:</b> {current}\n'\
-                    f'<b>𝙾𝚂 𝚄𝙿𝚃𝙸𝙼𝙴:</b> {osUptime}\n'\
-                    f'<b>𝙳𝙸𝚂𝙺 𝚂𝙿𝙰𝙲𝙴:</b> {total}\n'\
-                    f'<b>𝙳𝙸𝚂𝙺 𝚂𝙿𝙰𝙲𝙴 𝚄𝚂𝙴𝙳:</b> {used}\n'\
-                    f'<b>𝙳𝙸𝚂𝙺 𝚂𝙿𝙰𝙲𝙴 𝙵𝚁𝙴𝙴:</b> {free}\n'\
-                    f'<b>𝚄𝙿𝙻𝙾𝙰𝙳 𝙳𝙰𝚃𝙰:</b> {sent}\n'\
-                    f'<b>𝙳𝙾𝚆𝙽𝙻𝙾𝙰𝙳 𝙳𝙰𝚃𝙰:</b> {recv}\n'\
-                    f'<b>𝙲𝙿𝚄 𝚄𝚂𝙰𝙶𝙴:</b> {cpuUsage}%\n'\
-                    f'<b>𝚁𝙰𝙼:</b> {mem_p}%\n'\
-                    f'<b>𝙳𝙸𝚂𝙺 𝚄𝚂𝙴𝙳:</b> {disk}%\n'\
-                    f'<b>𝙿𝙷𝚈𝚂𝙸𝙲𝙰𝙻 𝙲𝙾𝚁𝙴𝚂:</b> {p_core}\n'\
-                    f'<b>𝚃𝙾𝚃𝙰𝙻 𝙲𝙾𝚁𝙴𝚂:</b> {t_core}\n'\
-                    f'<b>𝚂𝚆𝙰𝙿:</b> {swap_t}\n'\
-                    f'<b>𝚂𝚆𝙰𝙿 𝚄𝚂𝙴𝙳:</b> {swap_p}%\n'\
-                    f'<b>𝚃𝙾𝚃𝙰𝙻 𝙾𝙵 𝙼𝙴𝙼𝙾𝚁𝚈:</b> {mem_t}\n'\
-                    f'<b>𝙵𝚁𝙴𝙴 𝙾𝙵 𝙼𝙴𝙼𝙾𝚁𝚈:</b> {mem_a}\n'\
-                    f'<b>𝚄𝚂𝙰𝙶𝙴 𝙾𝙵 𝙼𝙴𝙼𝙾𝚁𝚈:</b> {mem_u}\n'
+                    f'<b>COMMIT DATE:</b> {last_commit}\n'\
+                    f'<b>ONLINE TIME:</b> {currentTime}\n'\
+                    f'<b>STARTED AT:</b> {current}\n'\
+                    f'<b>OS UPTIME:</b> {osUptime}\n'\
+                    f'<b>DISK:</b> {total}\n'\
+                    f'<b>USED DISK:</b> {used}\n'\
+                    f'<b>FREE DISK:</b> {free}\n'\
+                    f'<b>UPLOAD:</b> {sent}\n'\
+                    f'<b>DOWNLOAD:</b> {recv}\n'\
+                    f'<b>CPU USAGE:</b> {cpuUsage}%\n'\
+                    f'<b>RAM:</b> {mem_p}%\n'\
+                    f'<b>DISK USED:</b> {disk}%\n'\
+                    f'<b>PHYSICAL CORES:</b> {p_core}\n'\
+                    f'<b>TOTAL CORES:</b> {t_core}\n'\
+                    f'<b>SWAP:</b> {swap_t}\n'\
+                    f'<b>SWAP USED:</b> {swap_p}%\n'\
+                    f'<b>TOTAL MEMORY:</b> {mem_t}\n'\
+                    f'<b>FREE MEMORY:</b> {mem_a}\n'\
+                    f'<b>USED MEMORY:</b> {mem_u}\n'
 
     reply_message = sendMessage(stats, context.bot, update.message)
     Thread(target=auto_delete_message, args=(context.bot, update.message, reply_message)).start()           
@@ -370,7 +370,7 @@ help_string_telegraph_user = f'''
 '''
 
 help_user = telegraph.create_page(
-    title=f"{TITLE_NAME} Help",
+    title=f"⚡{TITLE_NAME}⚡ Help",
     content=help_string_telegraph_user)["path"]
 
 help_string_telegraph_admin = f'''
@@ -394,7 +394,7 @@ help_string_telegraph_admin = f'''
 '''
 
 help_admin = telegraph.create_page(
-    title=f"{TITLE_NAME} Help",
+    title=f"⚡{TITLE_NAME}⚡ Help",
     content=help_string_telegraph_admin)["path"]
 
 def bot_help(update, context):
@@ -466,10 +466,14 @@ def main():
                         chat_id, msg_id = map(int, f)
                     msg = '😎Restarted successfully❗'
                 else:
-                    msg = 'Bot Restarted!'
+                  if len(CMD_INDEX) == 0:
+                    msg = f'😎BOT RESTARTED!✅'
+                  else:
+                    msg = f'😎BOT №{CMD_INDEX} RESTARTED!✅'
                 for tag, links in data.items():
                      msg += f"\n\n{tag}: "
                      for index, link in enumerate(links, start=1):
+                         msg += "Please Re-Add the Torrent's\n\n"
                          msg += f" <a href='{link}'>{index}</a> |"
                          if len(msg.encode()) > 4000:
                              if '😎Restarted successfully❗' in msg and cid == chat_id:
