@@ -466,26 +466,10 @@ def main():
                         chat_id, msg_id = map(int, f)
                     msg = '😎Restarted successfully❗'
                 else:
-                    msg = f'Bot Restarted!'
+                    msg = f'😎Bot Restarted!✅'
                 for tag, links in data.items():
                   if len(CMD_INDEX) == 0:
                     msg = f'😎Bot Restarted!✅'
-                    msg += "\n\nPlease Re-Add the Torrent's"
-                    msg += f"\n\n{tag}: "
-                     for index, link in enumerate(links, start=1):
-                         msg += f" <a href='{link}'>{index}</a> |"
-                         if len(msg.encode()) > 4000:
-                             if '😎Restarted successfully❗' in msg and cid == chat_id:
-                                 bot.editMessageText(msg, chat_id, msg_id, parse_mode='HTML', disable_web_page_preview=True)
-                                 osremove(".restartmsg")
-                             else:
-                                 try:
-                                     bot.sendMessage(cid, msg, 'HTML', disable_web_page_preview=True)
-                                 except Exception as e:
-                                     LOGGER.error(e)
-                             msg = ''
-                  else:
-                    msg = f'😎Bot №{CMD_INDEX} Restarted!✅'
                     msg += "\n\nPlease Re-Add the Torrent's"
                     msg += f"\n\n{tag}: "
                      for index, link in enumerate(links, start=1):
