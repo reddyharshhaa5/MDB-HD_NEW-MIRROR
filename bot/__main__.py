@@ -470,7 +470,7 @@ def main():
                 for tag, links in data.items():
                     msg += f"\n\nPlease, Re-add Your Tasks!" 
                     msg += f"\n\n{tag}: "
-                     for index, link in enumerate(links, start=1):
+                    for index, link in enumerate(links, start=1):
                          msg += f" <a href='{link}'>{index}</a> |"
                          if len(msg.encode()) > 4000:
                              if '😎Restarted successfully❗' in msg and cid == chat_id:
