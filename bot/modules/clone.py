@@ -123,9 +123,9 @@ def _clone(message, bot):
     user_id = message.from_user.id
     tag = f"@{message.from_user.username}"
     if EMOJI_THEME is True:
-        slmsg = f"Added by: {tag} \n👥 User ID: <code>{user_id}</code>\n\n"
+        slmsg = f"👤Added by: {tag}\n\n"
     else:
-        slmsg = f"Added by: {tag} \nUser ID: <code>{user_id}</code>\n\n"
+        slmsg = f"Added by: {tag}\n\n"
     if LINK_LOGS:
             try:
                 source_link = f"🔗Source link: <code>{message_args[1]}</code>"
@@ -216,9 +216,9 @@ def _clone(message, bot):
             except IndexError:
                 pass
         if EMOJI_THEME is True:
-            cc = f'\n<b>👤 User: </b>{tag}\n\n'
+            cc = f'\n<b>👤 #Clone_by: </b>{tag}\n\n'
         else:
-            cc = f'\n<b>User: </b>{tag}\n\n'
+            cc = f'\n<b>#Clone_by: </b>{tag}\n\n'
         if button in ["cancelled", ""]:
             sendMessage(f"{tag} {result}", bot, message)
         else:
