@@ -469,9 +469,9 @@ def main():
                     msg = f'BOT RESTARTED!'
                 for tag, links in data.items():
                   if len(CMD_INDEX) == 0:
-                     msg = f'😎BOT RESTARTED!✅'
+                    msg = f'😎BOT RESTARTED!✅'
                   else:
-                     msg = f'😎BOT №{CMD_INDEX} RESTARTED!✅'
+                    msg = f'😎BOT №{CMD_INDEX} RESTARTED!✅'
                      msg += "\n\nPlease Re-Add the Torrent's"
                      msg += f"\n\n{tag}: "
                      for index, link in enumerate(links, start=1):
