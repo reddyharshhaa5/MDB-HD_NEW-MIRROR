@@ -466,14 +466,15 @@ def main():
                         chat_id, msg_id = map(int, f)
                     msg = '😎Restarted successfully❗'
                 else:
-                  if len(CMD_INDEX) == 0:
-                    msg = f'😎BOT RESTARTED!✅'
-                  else:
-                    msg = f'😎BOT №{CMD_INDEX} RESTARTED!✅'
+                    msg = f'BOT RESTARTED!'
                 for tag, links in data.items():
+                  if len(CMD_INDEX) == 0:
+                     msg = f'😎BOT RESTARTED!✅'
+                  else:
+                     msg = f'😎BOT №{CMD_INDEX} RESTARTED!✅'
+                     msg += "\n\nPlease Re-Add the Torrent's"
                      msg += f"\n\n{tag}: "
                      for index, link in enumerate(links, start=1):
-                         msg += "Please Re-Add the Torrent's\n\n"
                          msg += f" <a href='{link}'>{index}</a> |"
                          if len(msg.encode()) > 4000:
                              if '😎Restarted successfully❗' in msg and cid == chat_id:
