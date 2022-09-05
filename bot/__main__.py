@@ -201,7 +201,7 @@ def stats(update, context):
     else:
         sendMarkup(stats, context.bot, update.message, reply_markup)
 
-   update.effective_message.reply_photo(photo=random.choice(PICS), caption=stats, parse_mode=ParseMode.HTML)
+    update.effective_message.reply_photo(photo=random.choice(PICS), caption=stats, parse_mode=ParseMode.HTML)
 
 def start(update, context):
     buttons = ButtonMaker()
