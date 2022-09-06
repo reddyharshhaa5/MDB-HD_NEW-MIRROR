@@ -518,10 +518,10 @@ def main():
                     msg = f"Bot Restarted!\n"
                     msg += f"DATE: {date}\n"
                     msg += f"TIME: {time}\n"
-                    msg += f"TIMEZONE: {TIMEZONE}"
+                    msg += f"TIMEZONE: {TIMEZONE}\n"
 
                 for tag, links in data.items():
-                     msg += "\n\n😅Please, Re-add Your Tasks!\n"
+                     msg += "\n😅Please, Re-add Your Tasks!\n"
                      msg += f"\n{tag}: "
                      for index, link in enumerate(links, start=1):
                          msg += f" <a href='{link}'>{index}</a> |"
