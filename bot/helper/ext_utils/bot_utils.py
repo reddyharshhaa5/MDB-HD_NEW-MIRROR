@@ -148,8 +148,8 @@ def progress_bar(percentage):
         percentage = int(percentage)
     except Exception:
         percentage = 0
-    comp = "▰"
-    ncomp = "▱"
+    comp = "■"
+    ncomp = "□"
     return "".join(comp if i <= percentage // 10 else ncomp for i in range(1, 11))
     
 def get_progress_bar_string(status):
