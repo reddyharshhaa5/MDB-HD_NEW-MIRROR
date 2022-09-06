@@ -480,7 +480,6 @@ if SET_BOT_COMMANDS:
         (f'{BotCommands.SetThumbCommand}','Set thumbnail'),
         (f'{BotCommands.StatusCommand}','Get mirror status message'),
         (f'{BotCommands.StatsCommand}','Bot usage stats'),
-        (f'{BotCommands.UsageCommand}','Heroku Dyno usage'),
         (f'{BotCommands.SpeedCommand}','Speedtest'),
         (f'{BotCommands.WayBackCommand}','Internet Archive'),
         (f'{BotCommands.MediaInfoCommand}','Get Information of telegram Files'),
@@ -494,8 +493,6 @@ if SET_BOT_COMMANDS:
         (f'{BotCommands.UnAuthorizeCommand}','UnAuthorize user/chat'),
         (f'{BotCommands.AddSudoCommand}','Add Sudo'),
         (f'{BotCommands.RmSudoCommand}','Remove Sudo'),
-        (f'{BotCommands.AddleechlogCommand}','Add Leech Log Channel'),
-        (f'{BotCommands.RmleechlogCommand}','Remove Leech Log Channel'),
         (f'{BotCommands.SleepCommand}','Sleep Bot')
     ]
 
