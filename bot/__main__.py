@@ -521,9 +521,9 @@ def main():
                     msg += f"TIMEZONE: {TIMEZONE}"
 
                 for tag, links in data.items():
+                     msg += "\n\n😅Please, Re-add Your Tasks!\n"
                      msg += f"\n{tag}: "
                      for index, link in enumerate(links, start=1):
-                         msg += "Please, Re-add Your Tasks!"
                          msg += f" <a href='{link}'>{index}</a> |"
                          if len(msg.encode()) > 4000:
                              if '😎Restarted successfully❗' in msg and cid == chat_id:
