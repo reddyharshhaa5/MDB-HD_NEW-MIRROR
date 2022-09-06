@@ -192,7 +192,7 @@ def stats(update, context):
         else:
             clone_limit = f'{CLONE_LIMIT}GB/Link'
         if MEGA_LIMIT is None:
-            mega_limit = 'No Limit Set'
+            mega_limit = 'Not added. Sorry!'
         else:
             mega_limit = f'{MEGA_LIMIT}GB/Link'
         if LEECH_LIMIT is None:
@@ -219,7 +219,7 @@ def stats(update, context):
                      f'<b>🔐 Zip/Unzip: </b>{zip_unzip}\n'\
                      f'<b>🌧️ Leech: </b>{leech_limit}\n'\
                      f'<b>♻️ Clone: </b>{clone_limit}\n'\
-                     f'<b>🔰 Mega: </b>{mega_limit}\n'\
+                     f'<b>Ⓜ️ Mega: </b>{mega_limit}\n'\
                      f'<b>📃 Total Tasks: </b>{total_task}\n'\
                      f'<b>📝 User Tasks: </b>{user_task}\n\n'
         else: 
