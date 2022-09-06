@@ -157,7 +157,7 @@ def stats(update, context):
     mem_a = get_readable_file_size(memory.available)
     mem_u = get_readable_file_size(memory.used)
     if EMOJI_THEME is True:
-            stats = f'<b>《🌐 BOT STATISTICS 🌐》</b>\n' \
+            stats = f'<b>《🌐 BOT STATISTICS 🌐》</b>\n\n' \
                     f'<b>🛠 Updated On: </b>{last_commit}\n'\
                     f'<b>⌛ Uptime: </b>{currentTime}\n'\
                     f'<b>🟢 OS Uptime: </b>{osUptime}\n'\
@@ -169,7 +169,7 @@ def stats(update, context):
                     f'<b>⏬ Download Data:</b> {recv}\n\n'
 
     else:
-            stats = f'<b>《 BOT STATISTICS 》</b>\n' \
+            stats = f'<b>《 BOT STATISTICS 》</b>\n\n' \
                     f'<b>Updated On: </b>{last_commit}\n'\
                     f'<b>Uptime: </b>{currentTime}\n'\
                     f'<b>OS Uptime: </b>{osUptime}\n'\
@@ -214,7 +214,7 @@ def stats(update, context):
 
 
         if EMOJI_THEME is True: 
-            stats += f'<b>《 ⚠️ BOT LIMITS ⚠️ 》</b>\n'\
+            stats += f'<b>《 ⚠️ BOT LIMITS ⚠️ 》</b>\n\n'\
                      f'<b>🧲 Torrent/Direct: </b>{torrent_direct}\n'\
                      f'<b>🔐 Zip/Unzip: </b>{zip_unzip}\n'\
                      f'<b>🌧️ Leech: </b>{leech_limit}\n'\
@@ -223,7 +223,7 @@ def stats(update, context):
                      f'<b>📃 Total Tasks: </b>{total_task}\n'\
                      f'<b>📝 User Tasks: </b>{user_task}\n\n'
         else: 
-            stats += f'<b>《  BOT LIMITS  》</b>\n'\
+            stats += f'<b>《  BOT LIMITS  》</b>\n\n'\
                      f'<b>Torrent/Direct: </b>{torrent_direct}\n'\
                      f'<b>Zip/Unzip: </b>{zip_unzip}\n'\
                      f'<b>Leech: </b>{leech_limit}\n'\
@@ -329,8 +329,8 @@ def log(update, context):
     sendLogFile(context.bot, update.message)
 
 
-help_string = '''
-<b>The Ultimate Telegram MIrror-Leech Bot to Upload Your File & Link in Google Drive & Telegram</b>
+help_string = f'''
+<b>The Ultimate ⚡{TITLE_NAME}⚡ to Upload Your File & Link in Google Drive & Telegram</b>
 Choose a help category:
 '''
 
@@ -510,7 +510,7 @@ def main():
                 if ospath.isfile(".restartmsg"):
                     with open(".restartmsg") as f:
                         chat_id, msg_id = map(int, f)
-                    msg = f"😎Restarted successfully❗\n\n"
+                    msg = f"😎Restarted successfully❗\n"
                     msg += f"📅DATE: {date}\n"
                     msg += f"⌚TIME: {time}\n"
                     msg += f"🗺️TIMEZONE: {TIMEZONE}\n"
@@ -546,7 +546,7 @@ def main():
     if ospath.isfile(".restartmsg"):
         with open(".restartmsg") as f:
             chat_id, msg_id = map(int, f)
-        msg = f"😎Restarted successfully❗\n\n📅DATE: {date}\n⌚TIME: {time}\n🗺️TIMEZONE: {TIMEZONE}\n"
+        msg = f"😎Restarted successfully❗\n📅DATE: {date}\n⌚TIME: {time}\n🗺️TIMEZONE: {TIMEZONE}\n"
         bot.edit_message_text(msg, chat_id, msg_id)
         osremove(".restartmsg")
     elif not notifier_dict and AUTHORIZED_CHATS:
