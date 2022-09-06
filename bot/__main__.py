@@ -3,6 +3,7 @@ import random
 from random import choice
 from os import path as ospath, remove as osremove, execl as osexecl
 from subprocess import run as srun, check_output
+from datetime import datetime, timedelta
 from psutil import disk_usage, cpu_percent, swap_memory, cpu_count, virtual_memory, net_io_counters, boot_time
 from time import time
 from sys import executable
@@ -11,21 +12,21 @@ from telegram.ext import CommandHandler
 import requests
 import pytz
 from bot import bot, dispatcher, updater, botStartTime, TIMEZONE, IGNORE_PENDING_REQUESTS, LOGGER, Interval, INCOMPLETE_TASK_NOTIFIER, \
-                    DB_URI, alive, app, main_loop, HEROKU_APP_NAME, HEROKU_API_KEY, SET_BOT_COMMANDS, AUTHORIZED_CHATS, EMOJI_THEME, \
-                    START_BTN1_NAME, START_BTN1_URL, START_BTN2_NAME, START_BTN2_URL, CREDIT_NAME, TITLE_NAME, PICS, CMD_INDEX
+                    DB_URI, alive, app, main_loop, HEROKU_API_KEY, HEROKU_APP_NAME, SET_BOT_COMMANDS, AUTHORIZED_CHATS, EMOJI_THEME, \
+                    START_BTN1_NAME, START_BTN1_URL, START_BTN2_NAME, START_BTN2_URL, CREDIT_NAME, TITLE_NAME, PICS, FINISHED_PROGRESS_STR, UN_FINISHED_PROGRESS_STR, \
+                    SHOW_LIMITS_IN_STATS, LEECH_LIMIT, TORRENT_DIRECT_LIMIT, CLONE_LIMIT, MEGA_LIMIT, ZIP_UNZIP_LIMIT, TOTAL_TASKS_LIMIT, USER_TASKS_LIMIT
 from .helper.ext_utils.fs_utils import start_cleanup, clean_all, exit_clean_up
 from .helper.ext_utils.telegraph_helper import telegraph
 from .helper.ext_utils.bot_utils import get_readable_file_size, get_readable_time
 from .helper.ext_utils.db_handler import DbManger
 from .helper.telegram_helper.bot_commands import BotCommands
-from .helper.telegram_helper.message_utils import sendMessage, sendMarkup, editMessage, sendLogFile, sendPhoto, auto_delete_message
+from .helper.telegram_helper.message_utils import sendMessage, sendMarkup, editMessage, sendLogFile, sendPhoto
 from .helper.telegram_helper.filters import CustomFilters
 from .helper.telegram_helper.button_build import ButtonMaker
 from bot.modules.wayback import getRandomUserAgent
 from .modules import authorize, list, cancel_mirror, mirror_status, mirror_leech, clone, ytdlp, shell, eval, \
-                    delete, count, leech_settings, search, rss, wayback, speedtest, anilist, bt_select, mediainfo, hash, sleep
+                    delete, count, leech_settings, search, rss, wayback, speedtest, usage, anilist, bt_select, mediainfo, hash, sleep
 from datetime import datetime
-from threading import Thread
 
 try: import heroku3
 except ModuleNotFoundError: srun("pip install heroku3", capture_output=False, shell=True)
@@ -65,18 +66,16 @@ def getHerokuDetails(h_api_key, h_app_name):
         quota_remain = account_quota - quota_used
         if EMOJI_THEME is True:
             abc += f'<b></b>\n'
-            abc += f'<b>《🌐 HEROKU STATS 🌐》</b>\n'
-            abc += f'<b></b>\n'
-            abc += f"<b>💪🏻 FULL</b>: {get_readable_time(account_quota)}\n"
-            abc += f"<b>👎🏻 USED</b>: {get_readable_time(quota_used)}\n"
-            abc += f"<b>👍🏻 FREE</b>: {get_readable_time(quota_remain)}\n"
+            abc += f'<b>╭─《🌐 HEROKU STATS 🌐》</b>\n'
+            abc += f"<b>├ 💪🏻 FULL</b>: {get_readable_time(account_quota)}\n"
+            abc += f"<b>├ 👎🏻 USED</b>: {get_readable_time(quota_used)}\n"
+            abc += f"<b>├ 👍🏻 FREE</b>: {get_readable_time(quota_remain)}\n"
         else:
             abc += f'<b></b>\n'
-            abc += f'<b>《 HEROKU STATS 》</b>\n'
-            abc += f'<b></b>\n'
-            abc += f"<b>FULL</b>: {get_readable_time(account_quota)}\n"
-            abc += f"<b>USED</b>: {get_readable_time(quota_used)}\n"
-            abc += f"<b>FREE</b>: {get_readable_time(quota_remain)}\n"
+            abc += f'<b>╭─《 HEROKU STATS 》</b>\n'
+            abc += f"<b>├ FULL</b>: {get_readable_time(account_quota)}\n"
+            abc += f"<b>├ USED</b>: {get_readable_time(quota_used)}\n"
+            abc += f"<b>├ FREE</b>: {get_readable_time(quota_remain)}\n"
         # App Quota
         AppQuotaUsed = 0
         OtherAppsUsage = 0
@@ -97,33 +96,44 @@ def getHerokuDetails(h_api_key, h_app_name):
                     pass
         LOGGER.info(f"This App: {str(app.name)}")
         if EMOJI_THEME is True:
-            abc += f"<b>🎃 APP USAGE:</b> {get_readable_time(AppQuotaUsed)}\n"
-            abc += f"<b>🗑️ OTHER APP:</b> {get_readable_time(OtherAppsUsage)}\n"
-            abc += f'<b></b>\n'
-            abc += f'<b>《 ☣️ {CREDIT_NAME} ☣️ 》</b>'
+            abc += f"<b>├ 🎃 APP USAGE:</b> {get_readable_time(AppQuotaUsed)}\n"
+            abc += f"<b>├ 🗑️ OTHER APP:</b> {get_readable_time(OtherAppsUsage)}\n"
+            abc += f'<b>╰─《 ☣️ {CREDIT_NAME} ☣️ 》</b>'
         else:
-            abc += f"<b>APP USAGE:</b> {get_readable_time(AppQuotaUsed)}\n"
-            abc += f"<b>OTHER APP:</b> {get_readable_time(OtherAppsUsage)}\n"
-            abc += f'<b></b>\n'
-            abc += f'<b>《 {CREDIT_NAME} 》</b>'
+            abc += f"<b>├ APP USAGE:</b> {get_readable_time(AppQuotaUsed)}\n"
+            abc += f"<b>├ OTHER APP:</b> {get_readable_time(OtherAppsUsage)}\n"
+            abc += f'<b>╰─《 {CREDIT_NAME} 》</b>'
         return abc
     except Exception as g:
         LOGGER.error(g)
         return None
 
 
-
-IMAGE_X = "https://graph.org/file/9c2c7250397f4ed2eed20.jpg"
+def progress_bar(percentage):
+    p_used = FINISHED_PROGRESS_STR
+    p_total = UN_FINISHED_PROGRESS_STR
+    if isinstance(percentage, str):
+        return 'NaN'
+    try:
+        percentage=int(percentage)
+    except:
+        percentage = 0
+    return ''.join(
+        p_used if i <= percentage // 10 else p_total for i in range(1, 11)
+    )
 
 now=datetime.now(pytz.timezone(f'{TIMEZONE}'))
 
 def stats(update, context):
     if ospath.exists('.git'):
         if EMOJI_THEME is True:
-            last_commit = check_output(["git log -1 --date=short --pretty=format:'%cd \n🛠 <b>FROM</b> %cr'"], shell=True).decode()
+            last_commit = check_output(["git log -1 --date=short --pretty=format:'%cd \n<b>├</b> 🛠<b>From</b> %cr'"], shell=True).decode()
+            botVersion = check_output(["git log -1 --date=format:v%y.%m%d.%H%M --pretty=format:%cd"], shell=True).decode()
         else:
-            last_commit = check_output(["git log -1 --date=short --pretty=format:'%cd \n<b>FROM</b> %cr'"], shell=True).decode()
+            last_commit = check_output(["git log -1 --date=short --pretty=format:'%cd \n<b>├</b> <b>From</b> %cr'"], shell=True).decode()
+            botVersion = check_output(["git log -1 --date=format:v%y.%m%d.%H%M --pretty=format:%cd"], shell=True).decode()
     else:
+        botVersion = 'No UPSTREAM_REPO'
         last_commit = 'No UPSTREAM_REPO'
     currentTime = get_readable_time(time() - botStartTime)
     current = now.strftime('%m/%d %I:%M:%S %p')
@@ -140,6 +150,7 @@ def stats(update, context):
     swap = swap_memory()
     swap_p = swap.percent
     swap_t = get_readable_file_size(swap.total)
+    swap_u = get_readable_file_size(swap.used)
     memory = virtual_memory()
     mem_p = memory.percent
     mem_t = get_readable_file_size(memory.total)
@@ -147,61 +158,88 @@ def stats(update, context):
     mem_u = get_readable_file_size(memory.used)
     if EMOJI_THEME is True:
             stats = f'<b>《🌐 BOT STATISTICS 🌐》</b>\n' \
-                    f'<b></b>\n' \
-                    f'<b>🛠 COMMIT DATE:</b> {last_commit}\n'\
-                    f'<b>🟢 ONLINE TIME:</b> {currentTime}\n'\
-                    f'<b>🟢 STARTED AT:</b> {current}\n'\
-                    f'<b>☠️ OS UPTIME:</b> {osUptime}\n'\
-                    f'<b>💾 DISK:</b> {total}\n'\
-                    f'<b>📀 USED DISK:</b> {used}\n'\
-                    f'<b>💿 FREE DISK:</b> {free}\n'\
-                    f'<b>⏫ UPLOAD:</b> {sent}\n'\
-                    f'<b>⏬ DOWNLOAD:</b> {recv}\n'\
-                    f'<b>🖥️ CPU USAGE:</b> {cpuUsage}%\n'\
-                    f'<b>📝 RAM:</b> {mem_p}%\n'\
-                    f'<b>👸 DISK USED:</b> {disk}%\n'\
-                    f'<b>💽 PHYSICAL CORES:</b> {p_core}\n'\
-                    f'<b>🍥 TOTAL CORES:</b> {t_core}\n'\
-                    f'<b>✳ SWAP:</b> {swap_t}\n'\
-                    f'<b>👸 SWAP USED:</b> {swap_p}%\n'\
-                    f'<b>☁ TOTAL MEMORY:</b> {mem_t}\n'\
-                    f'<b>💃 FREE MEMORY:</b> {mem_a}\n'\
-                    f'<b>👰 USED MEMORY:</b> {mem_u}\n'
+                    f'<b>🛠 Updated On: </b>{last_commit}\n'\
+                    f'<b>⌛ Uptime: </b>{currentTime}\n'\
+                    f'<b>🟢 OS Uptime: </b>{osUptime}\n'\
+                    f'<b>🖥️ CPU:</b> [{progress_bar(cpuUsage)}] {cpuUsage}%\n'\
+                    f'<b>📝 RAM:</b> [{progress_bar(mem_p)}] {mem_p}%\n'\
+                    f'<b>💾 Disk:</b> [{progress_bar(disk)}] {disk}%\n'\
+                    f'<b>💿 Disk Free:</b> {free}\n'\
+                    f'<b>⏫ Upload Data:</b> {sent}\n'\
+                    f'<b>⏬ Download Data:</b> {recv}\n\n'
+
     else:
             stats = f'<b>《 BOT STATISTICS 》</b>\n' \
-                    f'<b></b>\n' \
-                    f'<b>COMMIT DATE:</b> {last_commit}\n'\
-                    f'<b>ONLINE TIME:</b> {currentTime}\n'\
-                    f'<b>STARTED AT:</b> {current}\n'\
-                    f'<b>OS UPTIME:</b> {osUptime}\n'\
-                    f'<b>DISK:</b> {total}\n'\
-                    f'<b>USED DISK:</b> {used}\n'\
-                    f'<b>FREE DISK:</b> {free}\n'\
-                    f'<b>UPLOAD:</b> {sent}\n'\
-                    f'<b>DOWNLOAD:</b> {recv}\n'\
-                    f'<b>CPU USAGE:</b> {cpuUsage}%\n'\
-                    f'<b>RAM:</b> {mem_p}%\n'\
-                    f'<b>DISK USED:</b> {disk}%\n'\
-                    f'<b>PHYSICAL CORES:</b> {p_core}\n'\
-                    f'<b>TOTAL CORES:</b> {t_core}\n'\
-                    f'<b>SWAP:</b> {swap_t}\n'\
-                    f'<b>SWAP USED:</b> {swap_p}%\n'\
-                    f'<b>TOTAL MEMORY:</b> {mem_t}\n'\
-                    f'<b>FREE MEMORY:</b> {mem_a}\n'\
-                    f'<b>USED MEMORY:</b> {mem_u}\n'
+                    f'<b>Updated On: </b>{last_commit}\n'\
+                    f'<b>Uptime: </b>{currentTime}\n'\
+                    f'<b>OS Uptime: </b>{osUptime}\n'\
+                    f'<b>CPU usage:</b> [{progress_bar(cpuUsage)}] {cpuUsage}%\n'\
+                    f'<b>RAM:</b> [{progress_bar(mem_p)}] {mem_p}%\n'\
+                    f'<b>Disk:</b> [{progress_bar(disk)}] {disk}%\n'\
+                    f'<b>Disk Free:</b> {free}\n'\
+                    f'<b>Upload Data:</b> {sent}\n'\
+                    f'<b>Download Data:</b> {recv}\n\n'
 
-    reply_message = sendMessage(stats, context.bot, update.message)
-    Thread(target=auto_delete_message, args=(context.bot, update.message, reply_message)).start()           
 
-#     heroku = getHerokuDetails(HEROKU_API_KEY, HEROKU_APP_NAME)
-#     if heroku: stats += heroku 
-   
+
+    if SHOW_LIMITS_IN_STATS is True:
+        if TORRENT_DIRECT_LIMIT is None:
+            torrent_direct = 'No Limit Set'
+        else:
+            torrent_direct = f'{TORRENT_DIRECT_LIMIT}GB/Link'
+        if CLONE_LIMIT is None:
+            clone_limit = 'No Limit Set'
+        else:
+            clone_limit = f'{CLONE_LIMIT}GB/Link'
+        if MEGA_LIMIT is None:
+            mega_limit = 'No Limit Set'
+        else:
+            mega_limit = f'{MEGA_LIMIT}GB/Link'
+        if LEECH_LIMIT is None:
+            leech_limit = 'No Limit Set'
+        else:
+            leech_limit = f'{LEECH_LIMIT}GB/Link'
+        if ZIP_UNZIP_LIMIT is None:
+            zip_unzip = 'No Limit Set'
+        else:
+            zip_unzip = f'{ZIP_UNZIP_LIMIT}GB/Link'
+        if TOTAL_TASKS_LIMIT is None:
+            total_task = 'No Limit Set'
+        else:
+            total_task = f'{TOTAL_TASKS_LIMIT} Total Tasks/Time'
+        if USER_TASKS_LIMIT is None:
+            user_task = 'No Limit Set'
+        else:
+            user_task = f'{USER_TASKS_LIMIT} Tasks/user'
+
+
+        if EMOJI_THEME is True: 
+            stats += f'<b>《 ⚠️ BOT LIMITS ⚠️ 》</b>\n'\
+                     f'<b>🧲 Torrent/Direct: </b>{torrent_direct}\n'\
+                     f'<b>🔐 Zip/Unzip: </b>{zip_unzip}\n'\
+                     f'<b>🌧️ Leech: </b>{leech_limit}\n'\
+                     f'<b>♻️ Clone: </b>{clone_limit}\n'\
+                     f'<b>🔰 Mega: </b>{mega_limit}\n'\
+                     f'<b>📃 Total Tasks: </b>{total_task}\n'\
+                     f'<b>📝 User Tasks: </b>{user_task}\n\n'
+        else: 
+            stats += f'<b>《  BOT LIMITS  》</b>\n'\
+                     f'<b>Torrent/Direct: </b>{torrent_direct}\n'\
+                     f'<b>Zip/Unzip: </b>{zip_unzip}\n'\
+                     f'<b>Leech: </b>{leech_limit}\n'\
+                     f'<b>Clone: </b>{clone_limit}\n'\
+                     f'<b>Mega: </b>{mega_limit}\n'\
+                     f'<b>Total Tasks: </b>{total_task}\n'\
+                     f'<b>User Tasks: </b>{user_task}\n\n'
+
+                
+
+    heroku = getHerokuDetails(HEROKU_API_KEY, HEROKU_APP_NAME)
+    if heroku: stats += heroku 
     if PICS:
         sendPhoto(stats, context.bot, update.message, random.choice(PICS))
     else:
-        sendMarkup(stats, context.bot, update.message, reply_markup)
-
-    #update.effective_message.reply_photo(photo=random.choice(PICS), caption=stats, parse_mode=ParseMode.HTML)
+        sendMessage(stats, context.bot, update.message)
 
 def start(update, context):
     buttons = ButtonMaker()
@@ -221,10 +259,11 @@ Type /{BotCommands.HelpCommand} to get a list of available commands
         else:
             sendMarkup(start_string, context.bot, update.message, reply_markup)
     else:
+        text = f"Not Authorized user, deploy your own mirror bot"
         if PICS:
-            sendPhoto('Not Authorized user, deploy your own mirror bot', context.bot, update.message, photo=random.choice(PICS))
+            sendPhoto(text, context.bot, update.message, random.choice(PICS), reply_markup)
         else:
-            sendMarkup('Not Authorized user, deploy your own mirror bot', context.bot, update.message, reply_markup)
+            sendMarkup(text, context.bot, update.message, reply_markup)
 
 def restart(update, context):
     cmd = update.effective_message.text.split(' ', 1)
@@ -291,7 +330,7 @@ def log(update, context):
 
 
 help_string = '''
-<b><a href='https://github.com/Reflection-Mirror/Reflection-Mirror'>ReflectionMirror</a></b> - The Ultimate Telegram MIrror-Leech Bot to Upload Your File & Link in Google Drive & Telegram
+<b>The Ultimate Telegram MIrror-Leech Bot to Upload Your File & Link in Google Drive & Telegram</b>
 Choose a help category:
 '''
 
@@ -361,6 +400,8 @@ help_string_telegraph_user = f'''
 • <b>/{BotCommands.SearchCommand}</b> [query]: Search for torrents with API
 <br>sites: <code>rarbg, 1337x, yts, etzv, tgx, torlock, piratebay, nyaasi, ettv</code><br><br>
 • <b>/{BotCommands.StatusCommand}</b>: Shows a status of all the downloads
+<br><br>
+• <b>/{BotCommands.UsageCommand}</b>: Shows Heroku App Dyno Usage
 <br><br>
 • <b>/{BotCommands.StatsCommand}</b>: Show Stats of the machine the bot is hosted on
 <br><br>
@@ -434,12 +475,16 @@ if SET_BOT_COMMANDS:
         (f'{BotCommands.CancelMirror}','Cancel a task'),
         (f'{BotCommands.CancelAllCommand}','Cancel all downloading tasks'),
         (f'{BotCommands.ListCommand}','Search in Drive'),
+        (f'{BotCommands.SearchCommand}','Search in Torrent'),
         (f'{BotCommands.LeechSetCommand}','Leech settings'),
         (f'{BotCommands.SetThumbCommand}','Set thumbnail'),
         (f'{BotCommands.StatusCommand}','Get mirror status message'),
         (f'{BotCommands.StatsCommand}','Bot usage stats'),
+        (f'{BotCommands.UsageCommand}','Heroku Dyno usage'),
         (f'{BotCommands.SpeedCommand}','Speedtest'),
         (f'{BotCommands.WayBackCommand}','Internet Archive'),
+        (f'{BotCommands.MediaInfoCommand}','Get Information of telegram Files'),
+        (f'{BotCommands.HashCommand}','Get Hash of telegram Files'),
         (f'{BotCommands.PingCommand}','Ping the bot'),
         (f'{BotCommands.RestartCommand}','Restart the bot'),
         (f'{BotCommands.LogCommand}','Get the bot Log'),
@@ -449,6 +494,8 @@ if SET_BOT_COMMANDS:
         (f'{BotCommands.UnAuthorizeCommand}','UnAuthorize user/chat'),
         (f'{BotCommands.AddSudoCommand}','Add Sudo'),
         (f'{BotCommands.RmSudoCommand}','Remove Sudo'),
+        (f'{BotCommands.AddleechlogCommand}','Add Leech Log Channel'),
+        (f'{BotCommands.RmleechlogCommand}','Remove Leech Log Channel'),
         (f'{BotCommands.SleepCommand}','Sleep Bot')
     ]
 
@@ -457,6 +504,8 @@ def main():
     if SET_BOT_COMMANDS:
         bot.set_my_commands(botcmds)
     start_cleanup()
+    date = now.strftime('%d/%m/%y')
+    time = now.strftime('%I:%M:%S %p')
     notifier_dict = False
     if INCOMPLETE_TASK_NOTIFIER and DB_URI is not None:
         if notifier_dict := DbManger().get_incomplete_tasks():
@@ -464,13 +513,19 @@ def main():
                 if ospath.isfile(".restartmsg"):
                     with open(".restartmsg") as f:
                         chat_id, msg_id = map(int, f)
-                    msg = '😎Restarted successfully❗'
+                    msg = f"😎Restarted successfully❗\n"
+                    msg += f"📅DATE: {date}\n"
+                    msg += f"⌚TIME: {time}\n"
+                    msg += f"🗺️TIMEZONE: {TIMEZONE}\n"
                 else:
-                    msg = 'Bot Restarted!'
+                    msg = f"Bot Restarted!\n"
+                    msg += f"DATE: {date}\n"
+                    msg += f"TIME: {time}\n"
+                    msg += f"TIMEZONE: {TIMEZONE}"
+
                 for tag, links in data.items():
-                    msg += f"\n\nPlease, Re-add Your Tasks!" 
-                    msg += f"\n\n{tag}: "
-                    for index, link in enumerate(links, start=1):
+                     msg += f"\n{tag}: "
+                     for index, link in enumerate(links, start=1):
                          msg += f" <a href='{link}'>{index}</a> |"
                          if len(msg.encode()) > 4000:
                              if '😎Restarted successfully❗' in msg and cid == chat_id:
@@ -494,14 +549,17 @@ def main():
     if ospath.isfile(".restartmsg"):
         with open(".restartmsg") as f:
             chat_id, msg_id = map(int, f)
-        bot.edit_message_text("😎Restarted successfully❗", chat_id, msg_id)
+        msg = f"😎Restarted successfully❗\n DATE: {date}\n TIME: {time}\n TIMEZONE: {TIMEZONE}\n"
+        bot.edit_message_text(msg, chat_id, msg_id)
         osremove(".restartmsg")
     elif not notifier_dict and AUTHORIZED_CHATS:
+        text = f" Bot Restarted! \nDATE: {date} \nTIME: {time} \nTIMEZONE: {TIMEZONE}"
         for id_ in AUTHORIZED_CHATS:
             try:
-                bot.sendMessage(id_, "Bot Restarted!", 'HTML')
+                bot.sendMessage(chat_id=id_, text=text, parse_mode=ParseMode.HTML)
             except Exception as e:
                 LOGGER.error(e)
+
 
     start_handler = CommandHandler(BotCommands.StartCommand, start, run_async=True)
     ping_handler = CommandHandler(BotCommands.PingCommand, ping,
