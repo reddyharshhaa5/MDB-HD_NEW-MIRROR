@@ -510,7 +510,7 @@ def main():
                 if ospath.isfile(".restartmsg"):
                     with open(".restartmsg") as f:
                         chat_id, msg_id = map(int, f)
-                    msg = f"😎Restarted successfully❗\n"
+                    msg = f"😎Restarted successfully❗\n\n"
                     msg += f"📅DATE: {date}\n"
                     msg += f"⌚TIME: {time}\n"
                     msg += f"🗺️TIMEZONE: {TIMEZONE}\n"
@@ -546,7 +546,7 @@ def main():
     if ospath.isfile(".restartmsg"):
         with open(".restartmsg") as f:
             chat_id, msg_id = map(int, f)
-        msg = f"😎Restarted successfully❗\n DATE: {date}\n TIME: {time}\n TIMEZONE: {TIMEZONE}\n"
+        msg = f"😎Restarted successfully❗\n\n📅DATE: {date}\n⌚TIME: {time}\n🗺️TIMEZONE: {TIMEZONE}\n"
         bot.edit_message_text(msg, chat_id, msg_id)
         osremove(".restartmsg")
     elif not notifier_dict and AUTHORIZED_CHATS:
