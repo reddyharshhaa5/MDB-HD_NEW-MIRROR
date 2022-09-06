@@ -6,7 +6,7 @@ from subprocess import run as srun, check_output
 from psutil import disk_usage, cpu_percent, swap_memory, cpu_count, virtual_memory, net_io_counters, boot_time
 from time import time
 from sys import executable
-from telegram import ParseMode, InlineKeyboardMarkup
+from telegram import ParseMode, InlineKeyboardMarkup, reply_markup
 from telegram.ext import CommandHandler
 import requests
 import pytz
