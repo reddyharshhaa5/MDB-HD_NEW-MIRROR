@@ -397,6 +397,11 @@ try:
 except KeyError:
     USER_TASKS_LIMIT = None
 try:
+    SHOW_LIMITS_IN_STATS = getConfig('SHOW_LIMITS_IN_STATS')
+    SHOW_LIMITS_IN_STATS = SHOW_LIMITS_IN_STATS.lower() == 'true'
+except KeyError:
+    SHOW_LIMITS_IN_STATS = False
+try:
     STORAGE_THRESHOLD = getConfig('STORAGE_THRESHOLD')
     if len(STORAGE_THRESHOLD) == 0:
         raise KeyError
