@@ -264,31 +264,31 @@ def _getResult(search_results, key, message, method):
                     msg += f"<code><a href='{result['url']}'>{escape(result['name'])}</a></code><br>"
                 if 'torrents' in result.keys():
                     for subres in result['torrents']:
-                        msg += f"<b>Quality: </b>{subres['quality']} | <b>Type: </b>{subres['type']} | <b>Size: </b>{subres['size']}<br>"
+                        msg += f"<b>🔮Quality: </b>{subres['quality']} | <b>💈Type: </b>{subres['type']} | <b>📦Size: </b>{subres['size']}<br>"
                         if 'torrent' in subres.keys():
-                            msg += f"<a href='{subres['torrent']}'>Direct Link</a><br>"
+                            msg += f"<a href='{subres['torrent']}'>🔗Direct Link</a><br>"
                         elif 'magnet' in subres.keys():
-                            msg += f"<b>Share Magnet to</b> <a href='http://t.me/share/url?url={subres['magnet']}'>Telegram</a><br>"
+                            msg += f"<b>🧲Share Magnet to</b> <a href='http://t.me/share/url?url={subres['magnet']}'>Telegram</a><br>"
                     msg += '<br>'
                 else:
                     msg += f"<b>Size: </b>{result['size']}<br>"
                     try:
-                        msg += f"<b>Seeders: </b>{result['seeders']} | <b>Leechers: </b>{result['leechers']}<br>"
+                        msg += f"<b>🌱Seeders: </b>{result['seeders']} | <b>🐌Leechers: </b>{result['leechers']}<br>"
                     except:
                         pass
                     if 'torrent' in result.keys():
                         msg += f"<a href='{result['torrent']}'>Direct Link</a><br><br>"
                     elif 'magnet' in result.keys():
-                        msg += f"<b>Share Magnet to</b> <a href='http://t.me/share/url?url={quote(result['magnet'])}'>Telegram</a><br><br>"
+                        msg += f"<b>🧲Share Magnet to</b> <a href='http://t.me/share/url?url={quote(result['magnet'])}'>Telegram</a><br><br>"
             else:
                 msg += f"<a href='{result.descrLink}'>{escape(result.fileName)}</a><br>"
-                msg += f"<b>Size: </b>{get_readable_file_size(result.fileSize)}<br>"
-                msg += f"<b>Seeders: </b>{result.nbSeeders} | <b>Leechers: </b>{result.nbLeechers}<br>"
+                msg += f"<b>📦Size: </b>{get_readable_file_size(result.fileSize)}<br>"
+                msg += f"<b>🌱Seeders: </b>{result.nbSeeders} | <b>🐌Leechers: </b>{result.nbLeechers}<br>"
                 link = result.fileUrl
                 if link.startswith('magnet:'):
-                    msg += f"<b>Share Magnet to</b> <a href='http://t.me/share/url?url={quote(link)}'>Telegram</a><br><br>"
+                    msg += f"<b>🧲Share Magnet to</b> <a href='http://t.me/share/url?url={quote(link)}'>Telegram</a><br><br>"
                 else:
-                    msg += f"<a href='{link}'>Direct Link</a><br><br>"
+                    msg += f"<a href='{link}'>🔗Direct Link</a><br><br>"
 
             if len(msg.encode('utf-8')) > 39000:
                telegraph_content.append(msg)
@@ -302,7 +302,7 @@ def _getResult(search_results, key, message, method):
 
         editMessage(f"<b>Creating</b> {len(telegraph_content)} <b>Telegraph pages.</b>", message)
         path = [telegraph.create_page(
-                    title=f"{TITLE_NAME}",
+                    title=f"⚡{TITLE_NAME}⚡",
                     content=content
                 )["path"] for content in telegraph_content]
         sleep(0.5)
@@ -328,39 +328,39 @@ def _getResult(search_results, key, message, method):
                     msg += f"<div> <a class='withhover' href='{result['url']}'>{escape(result['name'])}</a></div>"
                 if 'torrents' in result.keys():
                     for subres in result['torrents']:
-                        msg += f"<span class='topmarginsm'><b>Quality: </b>{subres['quality']} | "
-                        msg += f"<b>Type: </b>{subres['type']} | <b>Size: </b>{subres['size']}</span>"
+                        msg += f"<span class='topmarginsm'><b>🔮Quality: </b>{subres['quality']} | "
+                        msg += f"<b>💈Type: </b>{subres['type']} | <b>📦Size: </b>{subres['size']}</span>"
                         if 'torrent' in subres.keys():
                             msg += "<span class='topmarginxl'><a class='withhover' "
-                            msg += f"href='{subres['torrent']}'>Direct Link</a></span>"
+                            msg += f"href='{subres['torrent']}'>🔗Direct Link</a></span>"
                         elif 'magnet' in subres.keys():
-                            msg += "<span><b>Share Magnet to</b> <a class='withhover' "
+                            msg += "<span><b>🧲Share Magnet to</b> <a class='withhover' "
                             msg += f"href='http://t.me/share/url?url={subres['magnet']}'>Telegram</a></span>"
                     msg += '<br>'
                 else:
                     msg += f"<span class='topmarginsm'><b>Size: </b>{result['size']}</span>"
                     try:
-                        msg += f"<span class='topmarginsm'><b>Seeders: </b>{result['seeders']} | "
-                        msg += f"<b>Leechers: </b>{result['leechers']}</span>"
+                        msg += f"<span class='topmarginsm'><b>🌱Seeders: </b>{result['seeders']} | "
+                        msg += f"<b>🐌Leechers: </b>{result['leechers']}</span>"
                     except:
                         pass
                     if 'torrent' in result.keys():
                         msg += "<span class='topmarginxl'><a class='withhover' "
-                        msg += f"href='{result['torrent']}'>Direct Link</a></span>"
+                        msg += f"href='{result['torrent']}'>🔗Direct Link</a></span>"
                     elif 'magnet' in result.keys():
-                        msg += "<span class='topmarginxl'><b>Share Magnet to</b> <a class='withhover' "
+                        msg += "<span class='topmarginxl'><b>🧲Share Magnet to</b> <a class='withhover' "
                         msg += f"href='http://t.me/share/url?url={quote(result['magnet'])}'>Telegram</a></span>"
             else:
                 msg += f"<div> <a class='withhover' href='{result.descrLink}'>{escape(result.fileName)}</a></div>"
-                msg += f"<span class='topmarginsm'><b>Size: </b>{get_readable_file_size(result.fileSize)}</span>"
-                msg += f"<span class='topmarginsm'><b>Seeders: </b>{result.nbSeeders} | "
-                msg += f"<b>Leechers: </b>{result.nbLeechers}</span>"
+                msg += f"<span class='topmarginsm'><b>📦Size: </b>{get_readable_file_size(result.fileSize)}</span>"
+                msg += f"<span class='topmarginsm'><b>🌱Seeders: </b>{result.nbSeeders} | "
+                msg += f"<b>🐌Leechers: </b>{result.nbLeechers}</span>"
                 link = result.fileUrl
                 if link.startswith('magnet:'):
-                    msg += "<span class='topmarginxl'><b>Share Magnet to</b> <a class='withhover' "
+                    msg += "<span class='topmarginxl'><b>🧲Share Magnet to</b> <a class='withhover' "
                     msg += f"href='http://t.me/share/url?url={quote(link)}'>Telegram</a></span>"
                 else:
-                    msg += f"<span class='topmarginxl'><a class='withhover' href='{link}'>Direct Link</a></span>"
+                    msg += f"<span class='topmarginxl'><a class='withhover' href='{link}'>🔗Direct Link</a></span>"
             msg += '</span>'
         return msg
 
