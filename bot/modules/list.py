@@ -2,7 +2,7 @@ from threading import Thread
 from telegram import InlineKeyboardMarkup
 from telegram.ext import CommandHandler, CallbackQueryHandler
 
-from bot import LOGGER, TELEGRAPH_STYLE, dispatcher
+from bot import LOGGER, TELEGRAPH_STYLE, dispatcher, EMOJI_THEME
 from bot.helper.mirror_utils.upload_utils.gdriveTools import GoogleDriveHelper
 from bot.helper.telegram_helper.message_utils import sendMessage, editMessage, sendMarkup, sendFile, deleteMessage
 from bot.helper.telegram_helper.filters import CustomFilters
