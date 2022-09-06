@@ -6,7 +6,7 @@ from subprocess import run as srun, check_output
 from psutil import disk_usage, cpu_percent, swap_memory, cpu_count, virtual_memory, net_io_counters, boot_time
 from time import time
 from sys import executable
-from telegram import ParseMode, InlineKeyboardMarkup, reply_markup
+from telegram import ParseMode, InlineKeyboardMarkup
 from telegram.ext import CommandHandler
 import requests
 import pytz
@@ -199,9 +199,9 @@ def stats(update, context):
     if PICS:
         sendPhoto(stats, context.bot, update.message, random.choice(PICS), reply_markup)
     else:
-        sendMarkup(stats, context.bot, update.message, reply_markup)
+        sendMarkup(stats, context.bot, update.message)
 
-    update.effective_message.reply_photo(photo=random.choice(PICS), caption=stats, parse_mode=ParseMode.HTML)
+    #update.effective_message.reply_photo(photo=random.choice(PICS), caption=stats, parse_mode=ParseMode.HTML)
 
 def start(update, context):
     buttons = ButtonMaker()
