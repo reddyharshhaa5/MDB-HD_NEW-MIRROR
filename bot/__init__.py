@@ -124,7 +124,7 @@ aria2 = ariaAPI(
 )
 
 def get_client():
-    return qbClient(host="localhost", port=443)
+    return qbClient(host="localhost", port=8090)
 
 DOWNLOAD_DIR = None
 BOT_TOKEN = None
