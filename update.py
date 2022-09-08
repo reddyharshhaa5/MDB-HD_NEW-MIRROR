@@ -37,7 +37,7 @@ try:
     if len(UPSTREAM_REPO) == 0:
        raise TypeError
 except:
-    UPSTREAM_REPO = "https://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@github.com/nodirhajiev/MDB_NEW"
+    UPSTREAM_REPO = "https://github.com/nodirhajiev/MDB_NEW.git"
 try:
     if len(UPSTREAM_BRANCH) == 0:
        raise TypeError
