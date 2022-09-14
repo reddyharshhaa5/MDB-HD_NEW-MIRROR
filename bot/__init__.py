@@ -636,27 +636,27 @@ except KeyError:
 try:
     AUTHOR_NAME = getConfig('AUTHOR_NAME')
     if len(AUTHOR_NAME) == 0:
-        AUTHOR_NAME = 'NXD'
+        AUTHOR_NAME = 'SPARKX'
 except KeyError:
-    AUTHOR_NAME = 'NXD'
+    AUTHOR_NAME = 'SPARKX'
 try:
     AUTHOR_URL = getConfig('AUTHOR_URL')
     if len(AUTHOR_URL) == 0:
-        AUTHOR_URL = 'https://t.me/nodir_khajiev'
+        AUTHOR_URL = 'https://t.me/harshhaareddy'
 except KeyError:
-    AUTHOR_URL = 'https://t.me/nodir_khajiev'
+    AUTHOR_URL = 'https://t.me/harshhaareddy'
 try:
     GD_INFO = getConfig('GD_INFO')
     if len(GD_INFO) == 0:
-        GD_INFO = 'Uploaded by MDB'
+        GD_INFO = 'Uploaded by Sparkx-cloud'
 except KeyError:
-    GD_INFO = 'Uploaded by MDB'
+    GD_INFO = 'Uploaded by Sparkx-cloud'
 try:
     TITLE_NAME = getConfig('TITLE_NAME')
     if len(TITLE_NAME) == 0:
-        TITLE_NAME = 'MDB'
+        TITLE_NAME = 'Sparkx-cloud'
 except KeyError:
-    TITLE_NAME = 'MDB'
+    TITLE_NAME = 'Sparkx-cloud'
 try:
     START_BTN1_NAME = getConfig('START_BTN1_NAME')
     START_BTN1_URL = getConfig('START_BTN1_URL')
@@ -664,7 +664,7 @@ try:
         raise KeyError
 except:
     START_BTN1_NAME = 'ADMIN'
-    START_BTN1_URL = 'https://t.me/nodir_khajiev'
+    START_BTN1_URL = 'https://t.me/NotHarshhaa'
 
 try:
     START_BTN2_NAME = getConfig('START_BTN2_NAME')
@@ -672,15 +672,15 @@ try:
     if len(START_BTN2_NAME) == 0 or len(START_BTN2_URL) == 0:
         raise KeyError
 except:
-    START_BTN2_NAME = 'MDB'
-    START_BTN2_URL = 'https://t.me/nodirdrivebots'
+    START_BTN2_NAME = 'Sparkx-cloud'
+    START_BTN2_URL = 'https://t.me/SparkxCloud'
 
 try:
     CREDIT_NAME = getConfig('CREDIT_NAME')
     if len(CREDIT_NAME) == 0:
-        CREDIT_NAME = 'MDB'
+        CREDIT_NAME = 'Sparkx-cloud'
 except KeyError:
-    CREDIT_NAME = 'MDB'
+    CREDIT_NAME = 'Sparkx-cloud'
 
 try:
     FINISHED_PROGRESS_STR = getConfig('FINISHED_PROGRESS_STR') 
